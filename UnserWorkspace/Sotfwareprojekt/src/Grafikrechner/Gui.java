@@ -108,6 +108,7 @@ public class Gui<E> extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				jlYwert1.setText("Y:"+jtfXwert1.getText());
+				s.zFG(jtfFunktion1.getText().toString());
 				
 				if(s.ueberpruefeFunktion(jtfFunktion1.getText().toString())) {
 					
@@ -129,7 +130,7 @@ public class Gui<E> extends JFrame {
 				s.zerlegeFunktionsgleichungFuenf(jtfFunktion1.getText().toString());
 				break;
 			default:
-				jtfFunktion1.setText("wähl was aus du idiot");
+				
 				break;
 			}
 				}

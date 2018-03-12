@@ -1,6 +1,9 @@
 package Grafikrechner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Steuerung {
 
@@ -282,5 +285,23 @@ public ArrayList<String> zerlegeFunktionsgleichungFuenf(String funktionsgleichun
 	public boolean ueberpruefeFunktion(String Funktionsgleichung) {
 		
 		return true;
+	}
+	
+	public List<String> zFG(String funktionsgleichung){
+		
+		List<String> liste = new ArrayList<String>();
+		String s1 = funktionsgleichung;
+		char[] tabelle = s1.toCharArray();
+		int anzahlElemente = 1;
+		
+		String[] liste2 = s1.split( Pattern.quote( "+" ) );
+			
+			
+		liste = (List<String>) Arrays.asList(liste2);
+		
+		
+		
+		
+		return liste;
 	}
 }
