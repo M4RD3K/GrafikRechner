@@ -45,6 +45,7 @@ public class FunktionsMenuPanel extends JPanel {
 		this.add(jtfFunktion1);
 		this.add(jlXwert1);
 		this.add(jtfXwert1);
+		this.add(jlYwert1);
 		this.add(jbBerechne);
 		
 		
