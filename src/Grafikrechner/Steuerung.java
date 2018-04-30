@@ -10,13 +10,23 @@ public class Steuerung {
 
 	Gui dieGui;
 	Daten dieDaten;
-	
+	Anleitung dieAnleitung;
 	public Steuerung() {
 	
 		dieGui = new Gui(this);
 		dieGui.setVisible(true);
 		dieDaten = new Daten();
+		
+		dieGui.unserMenu.jmiAnleitung.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				dieAnleitung = new Anleitung();
+				
+			}
+		});
+		
 		dieGui.funktionsMenuPanel.jbBerechne.addActionListener(new ActionListener() {
 			
 			@Override

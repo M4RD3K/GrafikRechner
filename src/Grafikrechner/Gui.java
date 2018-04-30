@@ -8,6 +8,9 @@ import javax.swing.*;
 
 public class Gui extends JFrame {
 
+	  //Schaubild
+	  Schaubild dasSchaubild;
+	
 	  //Assosation mit Steuerungsklasse
 	  Steuerung s;
 	  
@@ -27,6 +30,7 @@ public class Gui extends JFrame {
     	  s = dieSteuerung;
     	  
     	  //Objekte für das Frame bauen. 
+    	  dasSchaubild       = new Schaubild();
     	  jpHautpanel        = new JPanel(new BorderLayout());
     	  funktionsMenuPanel = new FunktionsMenuPanel();  	  
     	  unserMenu          = new UnsereMenuBar();
@@ -34,6 +38,7 @@ public class Gui extends JFrame {
     	  //Fensteroptionen	  
     	  this.setContentPane(jpHautpanel);
     	  this.add(funktionsMenuPanel, BorderLayout.NORTH);
+    	  this.add(dasSchaubild,BorderLayout.CENTER);
     	  this.setJMenuBar(unserMenu);
     	  this.pack();
     	  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
