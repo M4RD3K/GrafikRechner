@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.security.auth.DestroyFailedException;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 public class Steuerung {
 
@@ -23,24 +24,22 @@ public class Steuerung {
 			public void actionPerformed(ActionEvent e) {
 				
 				dieAnleitung = new Anleitung();
-				
 			}
 		});
 		
 		dieGui.funktionsMenuPanel.jbBerechne.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-			
+			public void actionPerformed(ActionEvent e) {	
 				zerlegeInProdukte();
-				zerlegeInFaktoren(dieDaten.zerlegteProdukte);
+				berechneYWert(getEingegebenerXwert());
 			}
 		});
 		
 		
 	}
 	
-   public ArrayList<String> zerlegeFunktionsgleichungFuenf(String funktionsgleichung){
+    public ArrayList<String> zerlegeFunktionsgleichungFuenf(String funktionsgleichung){
 		
 		int index = 0;
 		ArrayList<String> liste = new ArrayList<String>();
@@ -96,7 +95,7 @@ public class Steuerung {
 		liste.add(s1);
 		return liste;	
 	}
-	
+
 	public ArrayList<String> zerlegeFunktionsgleichungVier(String funktionsgleichung){
 		
 		int index = 0;
@@ -188,27 +187,19 @@ public class Steuerung {
 		}		
 		index = liste.get(0).length();
 		s1 = s1.substring(index);
-		tabelle = s1.toCharArray();
-					
+		tabelle = s1.toCharArray();	
 		liste.add(s1);
 		return liste;		
 	}
+	
 	public ArrayList<String> zerlegeFunktionsgleichungEins(String funktionsgleichung){
 		
-		int index = 0;	
 		ArrayList<String> liste = new ArrayList<String>();
-		String s1 = funktionsgleichung;
-		char[] tabelle = s1.toCharArray();						
-		
+		String s1 = funktionsgleichung;					
 		liste.add(s1);
-		return liste;		
-	}
-
-	public boolean ueberpruefeFunktion(String Funktionsgleichung) {
+		return liste;	
 		
-		return true;
-	}	
-	
+	}
     
 	public void zerlegeInProdukte() {
 		
@@ -224,39 +215,47 @@ public class Steuerung {
 		}		
 	
 		if (zähler == 1) { 		
-			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungEins(getFunktionsgleichung()));	
+			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungEins(getFunktionsgleichungAusGui()));	
 		}	
 		if (zähler == 2) {		 
-			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungZwei(getFunktionsgleichung()));
+			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungZwei(getFunktionsgleichungAusGui()));
 		}		
 		if (zähler == 3) {		 
-			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungDrei(getFunktionsgleichung()));
+			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungDrei(getFunktionsgleichungAusGui()));
 		}	
 		if (zähler == 4) {	 
-			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungVier(getFunktionsgleichung()));
+			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungVier(getFunktionsgleichungAusGui()));
 		}
 		if (zähler == 5) {			 
-			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungFuenf(getFunktionsgleichung()));	
+			dieDaten.speichereAkutelleProdukte(this.zerlegeFunktionsgleichungFuenf(getFunktionsgleichungAusGui()));	
 		}
 		
 	}
 	
-	public String getFunktionsgleichung() {
+	public String getFunktionsgleichungAusGui() {
 		
 		String s = dieGui.funktionsMenuPanel.jtfFunktion1.getText();
-		
 		return s;
 		
 	}
 	
-	public void zerlegeInFaktoren(ArrayList<String> arrayList) {
+	public void berechneYWert(double x) {
 		
+		ArrayList<String> arrayList = new ArrayList<>();
+		arrayList = dieDaten.zerlegteProdukte;
 		Double ywert = 0.0;
-		String[] dasArray =  new String[2];
 		
 		for (int i = 0; i < arrayList.size(); i++) {
 			
-			
+			try {
+				
+				double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
+				System.out.println(konstante);
+				ywert = ywert+konstante;
+				dieGui.funktionsMenuPanel.jlYwert1.setText("Y: "+ywert);
+				
+			} catch (Exception e) {
+				
 			Double exponent,konstante;
 			String skonstante,shochzahl;
 			String produkt = arrayList.get(i);
@@ -268,13 +267,13 @@ public class Steuerung {
 					
 					 skonstante = produkt.substring(0, j);
 					 shochzahl = produkt.substring(j,produkt.length());	 
-					 konstante = bestimmeKonstante(skonstante);
+					 konstante = bestimmeKonstanteDesProdukts(skonstante);
 	                 exponent = bestimmeExponent(shochzahl);
-					 ywert = ywert + (berechneYwert(getXVariable(),exponent, konstante));
-					 dieGui.funktionsMenuPanel.jlYwert1.setText("Y: "+ywert);
-				 } 	
-				 		 			 
-				}			
+					 ywert = ywert + (berechneProduktZahlenWert(x,exponent, konstante));
+					 dieGui.funktionsMenuPanel.jlYwert1.setText("Y: "+ywert);			  
+				} 		 			 
+				}	
+			}
 			}		
 		}
 
@@ -298,10 +297,9 @@ public class Steuerung {
 		  
 	  }
 	  
-	public double bestimmeKonstante(String skonstante) {
+	public double bestimmeKonstanteDesProdukts(String skonstante) {
 		
 		double dkonstante = 0;
-		
 		if (skonstante.equals("")) {
 		} else if (skonstante.equals("-")) {
 			return -1;
@@ -311,12 +309,11 @@ public class Steuerung {
 		else  {
 			dkonstante = Double.parseDouble(skonstante);
 		}
-		
 		return dkonstante;
 		
 	} 
 	
-	public double berechneYwert(Double x,Double hochzahl,Double konstante) {
+	public double berechneProduktZahlenWert(Double x,Double hochzahl,Double konstante) {
 	
 	Double ywert; 	
     if (konstante == 0.0) {
@@ -325,9 +322,9 @@ public class Steuerung {
 	ywert = konstante*Math.pow(x, hochzahl);
 	}	
     return ywert; 
-   }
+    }
 	
-	public double getXVariable() {
+	public double getEingegebenerXwert() {
 		
 		try {
 		String svariable = dieGui.funktionsMenuPanel.jtfXwert1.getText().toString();
@@ -335,13 +332,9 @@ public class Steuerung {
 		return variable;
 			
 		} catch (Exception e) {
-		  System.out.println("fehler");
 		  return 0;
 		}
-	
-		
 		
 	}
-	
-	
+
 }

@@ -8,6 +8,10 @@ import javax.swing.*;
 
 public class Gui extends JFrame {
 
+	  //Ausgabefeld
+
+	  AusgabeFeld dasAusgabefeld;
+	
 	  //Schaubild
 	  Schaubild dasSchaubild;
 	
@@ -34,12 +38,14 @@ public class Gui extends JFrame {
     	  jpHautpanel        = new JPanel(new BorderLayout());
     	  funktionsMenuPanel = new FunktionsMenuPanel();  	  
     	  unserMenu          = new UnsereMenuBar();
+    	  dasAusgabefeld     = new AusgabeFeld();
     	  
     	  //Fensteroptionen	  
     	  this.setContentPane(jpHautpanel);
     	  this.add(funktionsMenuPanel, BorderLayout.NORTH);
     	  this.add(dasSchaubild,BorderLayout.CENTER);
     	  this.setJMenuBar(unserMenu);
+    	  this.add(dasAusgabefeld,BorderLayout.SOUTH);
     	  this.pack();
     	  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     	   

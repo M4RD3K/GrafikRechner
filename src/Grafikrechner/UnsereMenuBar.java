@@ -3,6 +3,8 @@ package Grafikrechner;
 import javax.swing.*;
 
 public class UnsereMenuBar extends JMenuBar {
+
+	
 	
 	JMenu jmskalierung;
 	JMenu jmHilfe;
