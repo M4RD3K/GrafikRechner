@@ -239,7 +239,7 @@ public class Steuerung {
 		
 	}
 	
-	public void berechneYWert(double x) {
+	public double berechneYWert(double x) {
 		
 		ArrayList<String> arrayList = new ArrayList<>();
 		arrayList = dieDaten.zerlegteProdukte;
@@ -274,7 +274,8 @@ public class Steuerung {
 				} 		 			 
 				}	
 			}
-			}		
+			}
+		return ywert;
 		}
 
 	  public double bestimmeExponent(String exponent) {

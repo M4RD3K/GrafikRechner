@@ -34,7 +34,7 @@ public class Gui extends JFrame {
     	  s = dieSteuerung;
     	  
     	  //Objekte für das Frame bauen. 
-    	  dasSchaubild       = new Schaubild();
+    	  dasSchaubild       = new Schaubild(this);
     	  jpHautpanel        = new JPanel(new BorderLayout());
     	  funktionsMenuPanel = new FunktionsMenuPanel();  	  
     	  unserMenu          = new UnsereMenuBar();
