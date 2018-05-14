@@ -12,11 +12,14 @@ public class Steuerung {
 	Gui dieGui;
 	Daten dieDaten;
 	Anleitung dieAnleitung;
+	Skalierung skalierung;
 	public Steuerung() {
 	
 		dieGui = new Gui(this);
 		dieGui.setVisible(true);
 		dieDaten = new Daten();
+		
+		skalierung = new Skalierung();
 		
 		dieGui.unserMenu.jmiAnleitung.addActionListener(new ActionListener() {
 			
@@ -47,6 +50,34 @@ public class Steuerung {
 			}
 		});
 		
+		dieGui.unserMenu.jmiSkalierungEinstellen.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				skalierung.setVisible(true);
+				
+				
+				if (skalierung != null) {
+					
+					skalierung.jButtonEinstellen.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							
+							dieGui.dasSchaubild.setxMin(Double.parseDouble(skalierung.jtXmin.getText()));
+							dieGui.dasSchaubild.setxMax(Double.parseDouble(skalierung.jtXmax.getText()));
+							dieGui.dasSchaubild.setyMin(Double.parseDouble(skalierung.jtYmin.getText()));
+							dieGui.dasSchaubild.setyMax(Double.parseDouble(skalierung.jtYmax.getText()));
+							
+						}
+					});
+					
+				}
+				
+				
+			}
+		});
 	}
 	
     public ArrayList<String> zerlegeFunktionsgleichungFuenf(String funktionsgleichung){
@@ -261,9 +292,7 @@ public class Steuerung {
 			try {
 				
 				double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
-				System.out.println(konstante);
 				ywert = ywert+konstante;
-				//dieGui.funktionsMenuPanel.jlYwert1.setText("Y: "+ywert);
 				
 			} catch (Exception e) {
 				
@@ -280,8 +309,7 @@ public class Steuerung {
 					 shochzahl = produkt.substring(j,produkt.length());	 
 					 konstante = bestimmeKonstanteDesProdukts(skonstante);
 	                 exponent = bestimmeExponent(shochzahl);
-					 ywert = ywert + (berechneProduktZahlenWert(x,exponent, konstante));
-					 //dieGui.funktionsMenuPanel.jlYwert1.setText("Y: "+ywert);			  
+					 ywert = ywert + (berechneProduktZahlenWert(x,exponent, konstante));		  
 				} 		 			 
 				}	
 			}

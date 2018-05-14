@@ -23,8 +23,7 @@ public class Berechne {
 
 					konArray = produkt.substring(0, j);
 					powString = produkt.substring(j, produkt.length());
-					double y = calculateY(konArray,powString);
-					System.out.println(y);		
+					double y = calculateY(konArray,powString);	
 				}
 			}
 		}
@@ -41,13 +40,8 @@ public class Berechne {
 			double as = Double.parseDouble(test);
 			power = (int) as;
 			char[] kon = s1.toCharArray();
-			int a = kon[1];
-			System.out.println(a);
-			System.out.println(power);
-			
+			int a = kon[1];		
 			ergebnis = a* (Math.pow(2,3));
-			System.out.println(ergebnis);
-			
 		
 		
 		}
