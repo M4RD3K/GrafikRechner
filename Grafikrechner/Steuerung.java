@@ -54,24 +54,51 @@ public class Steuerung {
 			public void actionPerformed(ActionEvent e) {
 				
 				dieSkalierung.setVisible(true);
-				
-				
-				dieSkalierung.jButtonEinstellen.addActionListener(new ActionListener() {
 					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						
-						dieGui.dasSchaubild.setxMin(Double.parseDouble(dieSkalierung.jtXmin.getText()));
-						dieGui.dasSchaubild.setxMax(Double.parseDouble(dieSkalierung.jtXmax.getText()));
-						dieGui.dasSchaubild.setyMin(Double.parseDouble(dieSkalierung.jtYmin.getText()));
-						dieGui.dasSchaubild.setyMax(Double.parseDouble(dieSkalierung.jtYmax.getText()));
-						
-					}
-				});				
+			}
+			
+			
+	
+			
+		});
+		
+		dieSkalierung.jButtonEinstellen.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				dieGui.dasSchaubild.setxMin(Double.parseDouble(dieSkalierung.jtXmin.getText()));
+				dieGui.dasSchaubild.setxMax(Double.parseDouble(dieSkalierung.jtXmax.getText()));
+				dieGui.dasSchaubild.setyMin(Double.parseDouble(dieSkalierung.jtYmin.getText()));
+				dieGui.dasSchaubild.setyMax(Double.parseDouble(dieSkalierung.jtYmax.getText()));
+				dieGui.repaint();
+				
 			}
 		});
 		
+		dieSkalierung.jButtonStandart.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				dieGui.dasSchaubild.setxMin(-10);
+				dieGui.dasSchaubild.setxMax(10);
+				dieGui.dasSchaubild.setyMin(-10);
+				dieGui.dasSchaubild.setyMax(10);
+				dieGui.repaint();
+				
+				dieSkalierung.jtXmin.setText("-10");
+				dieSkalierung.jtXmax.setText("10");
+				dieSkalierung.jtYmin.setText("-10");
+				dieSkalierung.jtYmax.setText("10");
+				
+				
+			}
+		});		
 	}
+	
+
+	
 	
 	public void funktionsgleichungZerlegen(String gleichung) {
 		
@@ -213,7 +240,7 @@ public class Steuerung {
 	
 	public void ausgabeXYwert() {
 		
-		dieGui.funktionsMenuPanel.jlYwert1.setText("Y: "+berechneYWert(getEingegebenerXwert()));
+		dieGui.funktionsMenuPanel.jlYwert1.setText("Y-Wert: "+berechneYWert(getEingegebenerXwert()));
 	}
 
 }

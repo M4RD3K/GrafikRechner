@@ -1,6 +1,7 @@
 package Grafikrechner;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -46,9 +47,10 @@ public class Gui extends JFrame {
     	  this.add(dasSchaubild,BorderLayout.CENTER);
     	  this.setJMenuBar(unserMenu);
     	  this.add(dasAusgabefeld,BorderLayout.SOUTH);
-    	  this.setSize(800,600);;
+    	  this.setSize(600,600);;
     	  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    	   
+    	  this.setTitle("Grafikrechner");
+    	  
 	}
 	
 	

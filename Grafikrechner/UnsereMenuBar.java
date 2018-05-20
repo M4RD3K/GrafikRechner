@@ -1,5 +1,7 @@
 package Grafikrechner;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 public class UnsereMenuBar extends JMenuBar {
@@ -11,6 +13,7 @@ public class UnsereMenuBar extends JMenuBar {
 	
 	JMenuItem jmiAnleitung;
 	JMenuItem jmiSkalierungEinstellen;
+	JMenuItem jmiUeber;
 	
 	
    public UnsereMenuBar() {
@@ -23,20 +26,19 @@ public class UnsereMenuBar extends JMenuBar {
 	   //JMenuItem
 	   jmiAnleitung = new JMenuItem("Anleitung");
 	   jmiSkalierungEinstellen = new JMenuItem("Skalierung Einstellen");
+	   jmiUeber = new JMenuItem("Über");
 	   
 	   
 	   //JMenu menuitems zuweisen 
 	   jmskalierung.add(jmiSkalierungEinstellen);
 	   jmHilfe.add(jmiAnleitung);
+	   jmHilfe.addSeparator();
+	   jmHilfe.add(jmiUeber);
 	   
 	   //JMenu in die Menubar hinzufügen
 	   this.add(jmskalierung);
 	   this.add(jmHilfe);
-	   
-	   //Optionen
-	   
-	   this.setVisible(true);
-	   
+	   this.setBorderPainted(false);
 	   
   }
 	

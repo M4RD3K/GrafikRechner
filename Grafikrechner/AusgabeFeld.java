@@ -1,5 +1,6 @@
 package Grafikrechner;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 
@@ -21,20 +22,19 @@ public class AusgabeFeld extends JPanel {
 		
 		
 		//Jlabel objekte
-		jlAbleitung = new JLabel("Ableitung:");
-		jlZeigeAbleitung = new JLabel("F(x)");
+		jlAbleitung = new JLabel("f'(x)");
+		jlZeigeAbleitung = new JLabel("Ableitung");
 		
 		//Jbutton objekte
 		jbZeichneFunktion = new JButton("Zeichnen");
 		
+		//Einstellungen
 	    this.add(jlAbleitung);
 	    this.add(jlZeigeAbleitung);
 	    this.add(jbZeichneFunktion);
-		
-	    
 		this.setLayout(new GridLayout(0,3));
-		this.setBorder(new TitledBorder("Ausgabe"));
-		
+		this.setBorder(new TitledBorder("Aktionen"));
+		this.setBackground(Color.white);
 		
 	}
 	

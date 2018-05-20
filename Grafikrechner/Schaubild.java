@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 public class Schaubild extends JPanel {
 
@@ -91,7 +92,7 @@ public class Schaubild extends JPanel {
 		
 		g.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
 		g.drawLine(this.getWidth()/2, 0, this.getWidth()/2, this.getHeight());
-		g.setColor(new Color(176, 196, 222));
+		g.setColor(new Color(239, 238, 238));
 		for (int i = 0; i < xMax-xMin; i++) {
 			
 			g.drawLine((int)(i*xSkalierung),0, (int)(i*xSkalierung), this.getHeight());
@@ -108,6 +109,7 @@ public class Schaubild extends JPanel {
 		}
 		g.setColor(new Color(0, 0, 0));
 		g.drawPolyline(xPunkte, yPunkte, xWerte.length);
+		
 	}
 
 }

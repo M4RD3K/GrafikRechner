@@ -1,25 +1,27 @@
 package Grafikrechner;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 public class Anleitung extends JFrame {
 
-	JLabel jlAnleitung;
+	//AnleitungsPanel
 	JPanel jPAnleitung;
 	
 	public Anleitung() {
 	
-		
-	 jPAnleitung = new JPanel();	
-	 jlAnleitung = new JLabel("Hier steht die Anleitung");
+	 //Objekte Bauen und einstellen
+	 jPAnleitung = new JPanel(new BorderLayout());	
+	 jPAnleitung.setBorder(new TitledBorder("Anleitung:"));
+	 jPAnleitung.setBackground(Color.WHITE);
 	
+	 //Anleitunspanel einstellem
 	 this.setContentPane(jPAnleitung);
 	 this.setSize(400, 400);
-	 jPAnleitung.add(jlAnleitung);
-	 
 	 this.setVisible(true);
+	 
 	 
 	}
 	

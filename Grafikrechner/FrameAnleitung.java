@@ -20,6 +20,7 @@ public FrameAnleitung() {
 		this.setTitle("Text");
 		this.setVisible(true);
 		this.setSize(300, 300);
+		this.setTitle("Anleitung");
 	}
 	
 	

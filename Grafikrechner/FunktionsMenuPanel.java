@@ -1,8 +1,11 @@
 package Grafikrechner;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class FunktionsMenuPanel extends JPanel {
 
@@ -30,12 +33,12 @@ public class FunktionsMenuPanel extends JPanel {
 		jtfXwert1    = new JTextField();		
 		
 		//JLabel Objekte
-		jlFunktion1 = new JLabel("Funktion: ");
-		jlXwert1    = new JLabel("X: ");
-		jlYwert1    = new JLabel("Y:");
+		jlFunktion1 = new JLabel("  Funktion: ");
+		jlXwert1    = new JLabel("X-Wert: ");
+		jlYwert1    = new JLabel("Y-Wert:");
 		
 		//JButton Objekte
-		jbBerechne = new JButton("Berechne Y-Wert");
+		jbBerechne = new JButton("Berechne");
 		
 		//Objekte dem Panel zurodnen
 		
@@ -45,8 +48,8 @@ public class FunktionsMenuPanel extends JPanel {
 		this.add(jtfXwert1);
 		this.add(jlYwert1);
 		this.add(jbBerechne);
-		
-		
+		this.setBackground(Color.white);
+		this.setBorder(new LineBorder(Color.BLACK));
 	}
 	
 }

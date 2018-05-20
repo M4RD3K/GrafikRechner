@@ -10,7 +10,6 @@ public class Skalierung extends JFrame {
 	JLabel jlXmax;
 	JLabel jlYmin;
 	JLabel jlYmax;
-	JLabel jlLeer;
 	
 	JTextField jtXmin;
 	JTextField jtXmax;
@@ -18,18 +17,18 @@ public class Skalierung extends JFrame {
 	JTextField jtYmax;
 	
 	JButton jButtonEinstellen;
+	JButton jButtonStandart;
 	
 	JPanel dasPanelSkalierung;
 	
 	public Skalierung() {
 		
-		dasPanelSkalierung = new JPanel(new GridLayout(2,5));
+		dasPanelSkalierung = new JPanel(new GridLayout(5,2));
 		
-		jlLeer = new JLabel("");
-		jlXmax = new JLabel("xMax:");
-		jlXmin = new JLabel("xMin:");
-		jlYmax = new JLabel("yMax:");
-		jlYmin = new JLabel("yMin:");
+		jlXmax = new JLabel("Maximaler X-Wert:");
+		jlXmin = new JLabel("Minimaler X-Wert:");
+		jlYmax = new JLabel("Maximaler Y-Wert:");
+		jlYmin = new JLabel("Minimaler Y-Wert:");
 		
 	    jtXmin = new JTextField("-10");
 	    jtXmax = new JTextField("10");
@@ -37,18 +36,19 @@ public class Skalierung extends JFrame {
 	    jtYmin = new JTextField("-10");
 	    
 	    jButtonEinstellen = new JButton("Skalierung einstellen");
+	    jButtonStandart   = new JButton("Standart Skalierung");
 		dasPanelSkalierung.add(jlXmin);
-		dasPanelSkalierung.add(jlXmax);
-		dasPanelSkalierung.add(jlYmin);
-		dasPanelSkalierung.add(jlYmax);
-		dasPanelSkalierung.add(jlLeer);
 		dasPanelSkalierung.add(jtXmin);
+		dasPanelSkalierung.add(jlXmax);
 		dasPanelSkalierung.add(jtXmax);
+		dasPanelSkalierung.add(jlYmin);
 		dasPanelSkalierung.add(jtYmin);
+		dasPanelSkalierung.add(jlYmax);
 		dasPanelSkalierung.add(jtYmax);
+		dasPanelSkalierung.add(jButtonStandart);
 		dasPanelSkalierung.add(jButtonEinstellen);
 	    this.setContentPane(dasPanelSkalierung);
-		
+		this.setTitle("Skalierung");
 		this.pack();
 		
 		
