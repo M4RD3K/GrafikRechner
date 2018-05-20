@@ -79,7 +79,6 @@ public class Schaubild extends JPanel {
 		}
 		for (int i = 0; i < yWerte.length; i++) {
 			yWerte[i]= dieGui.s.berechneYWert(xWerte[i]);
-			//System.out.println(yWerte[i]);
 		}
 		for (int i = 0; i < yPunkte.length; i++) {
 			

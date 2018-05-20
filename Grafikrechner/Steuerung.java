@@ -12,8 +12,10 @@ public class Steuerung {
 	Gui dieGui;
 	Daten dieDaten;
 	Anleitung dieAnleitung;
+	Skalierung dieSkalierung;
 	public Steuerung() {
 	
+		dieSkalierung = new Skalierung();
 		dieGui = new Gui(this);
 		dieGui.setVisible(true);
 		dieDaten = new Daten();
@@ -43,6 +45,29 @@ public class Steuerung {
 				funktionsgleichungZerlegen(getFunktionsgleichungAusGui());
 				dieGui.repaint();
 				
+			}
+		});
+		
+		dieGui.unserMenu.jmiSkalierungEinstellen.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				dieSkalierung.setVisible(true);
+				
+				
+				dieSkalierung.jButtonEinstellen.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						dieGui.dasSchaubild.setxMin(Double.parseDouble(dieSkalierung.jtXmin.getText()));
+						dieGui.dasSchaubild.setxMax(Double.parseDouble(dieSkalierung.jtXmax.getText()));
+						dieGui.dasSchaubild.setyMin(Double.parseDouble(dieSkalierung.jtYmin.getText()));
+						dieGui.dasSchaubild.setyMax(Double.parseDouble(dieSkalierung.jtYmax.getText()));
+						
+					}
+				});				
 			}
 		});
 		
@@ -103,7 +128,6 @@ public class Steuerung {
 			try {
 				
 				double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
-				System.out.println(konstante);
 				ywert = ywert+konstante;
 				
 			} catch (Exception e) {
