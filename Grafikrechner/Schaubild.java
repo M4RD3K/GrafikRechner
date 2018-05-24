@@ -83,29 +83,33 @@ public class Schaubild extends JPanel {
 		}
 		for (int i = 0; i < yPunkte.length; i++) {
 			
-				yPunkte[i]=(int)((this.getHeight()/2-(yWerte[i])/yAnteil));
+				yPunkte[i]=(int)((this.getHeight()/((yMax-yMin)/yMax)-(yWerte[i])/yAnteil));
 			
 		}
 		
 		
 		
 		
-		g.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
-		g.drawLine(this.getWidth()/2, 0, this.getWidth()/2, this.getHeight());
+		//g.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
+		//g.drawLine(this.getWidth()/2, 0, this.getWidth()/2, this.getHeight());
 		g.setColor(new Color(239, 238, 238));
 		for (int i = 0; i < xMax-xMin; i++) {
-			
-			g.drawLine((int)(i*xSkalierung),0, (int)(i*xSkalierung), this.getHeight());
-			if(xMin<0 && xMax>0) {
-				if(false) {
-					
-				}
-				
-			}
+			if(i+xMin==0) {
+				g.setColor(new Color(0, 0, 0));
+				g.drawLine((int)(i*xSkalierung),0, (int)(i*xSkalierung), this.getHeight());
+				g.setColor(new Color(239, 238, 238));
+			}else {	g.drawLine((int)(i*xSkalierung),0, (int)(i*xSkalierung), this.getHeight());
+			}			
 		}
 		
 		for (int i = 0; i < yMax-yMin; i++) {
+			if(i-yMax==0) {
+				g.setColor(new Color(0, 0, 0));
+				g.drawLine(0,(int)(i*ySkalierung), this.getWidth(), (int)(i*ySkalierung));
+				g.setColor(new Color(239, 238, 238));
+			}else {
 			g.drawLine(0,(int)(i*ySkalierung), this.getWidth(), (int)(i*ySkalierung));
+			}
 		}
 		g.setColor(new Color(0, 0, 0));
 		g.drawPolyline(xPunkte, yPunkte, xWerte.length);
