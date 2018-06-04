@@ -96,6 +96,7 @@ public class Schaubild extends JPanel {
 		for (int i = 0; i < xMax-xMin; i++) {
 			if(i+xMin==0) {
 				g.setColor(new Color(0, 0, 0));
+				
 				g.drawLine((int)(i*xSkalierung),0, (int)(i*xSkalierung), this.getHeight());
 				g.setColor(new Color(239, 238, 238));
 			}else {	g.drawLine((int)(i*xSkalierung),0, (int)(i*xSkalierung), this.getHeight());
@@ -111,7 +112,20 @@ public class Schaubild extends JPanel {
 			g.drawLine(0,(int)(i*ySkalierung), this.getWidth(), (int)(i*ySkalierung));
 			}
 		}
-		g.setColor(new Color(0, 0, 0));
+		for (int i = 0; i < yMax-yMin; i++) {
+			
+			g.setColor(new Color(0, 0, 0));
+			g.drawLine((int)(-xMin*xSkalierung-10),(int)(i*ySkalierung), (int)(-xMin*xSkalierung), (int)(i*ySkalierung));
+		}
+		for (int i = 0; i < xMax-xMin; i++) {
+			
+			g.setColor(new Color(0, 0, 0));
+			g.drawLine((int)(i*xSkalierung),(int)(yMax*ySkalierung), (int)(i*xSkalierung),(int)(yMax*ySkalierung+10)) ;
+		}
+		g.setColor(new Color(65, 105, 225));
+		if(dieGui.funktionsMenuPanel.jtfFunktion1.getText().equals("")) {g.setColor(new Color(0, 0, 0));
+			
+		}
 		g.drawPolyline(xPunkte, yPunkte, xWerte.length);
 		
 	}
