@@ -17,6 +17,7 @@ public class AusgabeFeld extends JPanel {
 
 	//Jbutton
 	JButton jbZeichneFunktion;
+	JButton jbAbleiten;
 	
 	public AusgabeFeld() {
 		
@@ -27,10 +28,11 @@ public class AusgabeFeld extends JPanel {
 		
 		//Jbutton objekte
 		jbZeichneFunktion = new JButton("Zeichnen");
+		jbAbleiten        = new JButton("Ableiten");
 		
 		//Einstellungen
+	    this.add(jbAbleiten);
 	    this.add(jlAbleitung);
-	    this.add(jlZeigeAbleitung);
 	    this.add(jbZeichneFunktion);
 		this.setLayout(new GridLayout(0,3));
 		this.setBorder(new TitledBorder("Aktionen"));

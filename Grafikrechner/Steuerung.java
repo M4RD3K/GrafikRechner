@@ -1,6 +1,7 @@
 package Grafikrechner;
 
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -13,12 +14,25 @@ public class Steuerung {
 	Daten dieDaten;
 	Anleitung dieAnleitung;
 	Skalierung dieSkalierung;
+	DecimalFormat format;
 	public Steuerung() {
 	
 		dieSkalierung = new Skalierung();
 		dieGui = new Gui(this);
 		dieGui.setVisible(true);
 		dieDaten = new Daten();
+		format = new DecimalFormat();
+	    
+		format.setDecimalSeparatorAlwaysShown(false);
+		
+		dieGui.dasAusgabefeld.jbAbleiten.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				bestimeAbleitung();
+			}
+		});
 		
 		dieGui.unserMenu.jmiAnleitung.addActionListener(new ActionListener() {
 			
@@ -44,6 +58,7 @@ public class Steuerung {
 			public void actionPerformed(ActionEvent e) {
 				funktionsgleichungZerlegen(getFunktionsgleichungAusGui());
 				dieGui.repaint();
+				bestimeAbleitung();
 				
 			}
 		});
@@ -199,16 +214,22 @@ public class Steuerung {
 	  }
 	  
 	public double bestimmeKonstanteDesProdukts(String skonstante) {
-		
+
 		double dkonstante = 0.0;
+		
 		if (skonstante.equals("")) {
+			return 1;
 		} else if (skonstante.equals("-")) {
 			return -1;
 		} else if (skonstante.equals("+")) {
 			return 1;
 		}
 		else  {
-			dkonstante = Double.parseDouble(skonstante);
+			if (Double.parseDouble(skonstante) == 0) {
+				return 0;
+			} else {
+				dkonstante = Double.parseDouble(skonstante);	
+			}
 		}
 		return dkonstante;
 		
@@ -218,7 +239,7 @@ public class Steuerung {
 	
 	double ywert; 	
     if (konstante == 0.0) {
-     ywert = Math.pow(x, hochzahl);
+     ywert = 0;
 	} else {
 	ywert = konstante*Math.pow(x, hochzahl);
 	}	
@@ -242,5 +263,70 @@ public class Steuerung {
 		
 		dieGui.funktionsMenuPanel.jlYwert1.setText("Y-Wert: "+berechneYWert(getEingegebenerXwert()));
 	}
+	
+	public void bestimeAbleitung() {
+	    
+		funktionsgleichungZerlegen(getFunktionsgleichungAusGui());
+		
+		ArrayList<String> abgeleitereProdukte = new ArrayList<>();
+		ArrayList<String> arrayList = new ArrayList<>();
+		arrayList = dieDaten.zerlegteProdukte;
+		
+		for (int i = 0; i < arrayList.size(); i++) {
+			
+			
+			try {
+				
+				double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
+				
+			} catch (Exception e) {
+			
+			double exponent,konstante;
+			double neuExponent,neuKonstante;
+			String skonstante,shochzahl,ableitung;
+			String produkt = arrayList.get(i);
+			char[] charList =  produkt.toCharArray();
+					
+			for (int j = 0; j < charList.length; j++) {
+			
+				 if (charList[j] =='x') {
+					 String ableitungProdukt = "";
+					 skonstante = produkt.substring(0, j);
+					 shochzahl = produkt.substring(j,produkt.length());	 
+					 konstante = bestimmeKonstanteDesProdukts(skonstante);
+	                 exponent = bestimmeExponent(shochzahl);
+	                 
+	                 neuKonstante = konstante*exponent;
+	                 neuExponent = exponent-1;       
+	     	        
+	                 ableitungProdukt = format.format(neuKonstante)+"x^"+format.format(neuExponent);
+	                 
+	                 if (neuKonstante == 1 ) {
+	                	 
+	                	 ableitungProdukt = "x^"+format.format(neuExponent);
+	 	        
+					}if (neuExponent == 1) {
+						
+					ableitungProdukt = format.format(neuKonstante)+"x";
+						
+					} if (neuExponent == 1 && neuKonstante == 1) {
+				    
+					 ableitungProdukt ="x"; }
+					
+					 if (neuExponent == 0 && neuKonstante == 1) {
+						    
+					 ableitungProdukt ="1"; }					
+					 abgeleitereProdukte.add(ableitungProdukt);
+					
+				    } 
 
+				}	
+			
+			}
+			
+		}
+		
+	    String ableitung = String.join("", abgeleitereProdukte);
+		dieGui.dasAusgabefeld.jlAbleitung.setText("f'(x) = "+ableitung);
+	}
 }
