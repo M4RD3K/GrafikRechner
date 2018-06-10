@@ -28,7 +28,7 @@ public class Gui extends JFrame {
 	  //Die Menübar
 	  UnsereMenuBar unserMenu;
 	  
-	  //Constuctor 
+	  //Konstuctor 
       public Gui(Steuerung dieSteuerung) {
 	
     	  //Assisation mit Steuerungsklasse herstellen

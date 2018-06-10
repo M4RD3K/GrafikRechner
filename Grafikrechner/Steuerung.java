@@ -10,21 +10,27 @@ import javax.swing.plaf.synth.SynthSpinnerUI;
 
 public class Steuerung {
 
+	//Assosationen deklarieren
 	Gui dieGui;
 	Daten dieDaten;
 	Anleitung dieAnleitung;
 	Skalierung dieSkalierung;
 	DecimalFormat format;
+	
+	//Konstruktor 
 	public Steuerung() {
 	
 		dieSkalierung = new Skalierung();
 		dieGui = new Gui(this);
 		dieGui.setVisible(true);
 		dieDaten = new Daten();
-		format = new DecimalFormat();
-	    
-		format.setDecimalSeparatorAlwaysShown(false);
 		
+		
+		//Objekt um das Format der Double Werte anzupassen
+		format = new DecimalFormat();
+		format.setDecimalSeparatorAlwaysShown(false);
+	
+		//Actionlistner der Buttons 
 		dieGui.dasAusgabefeld.jbAbleiten.addActionListener(new ActionListener() {
 			
 			@Override
@@ -56,6 +62,7 @@ public class Steuerung {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				funktionsgleichungZerlegen(getFunktionsgleichungAusGui());
 				dieGui.repaint();
 				bestimeAbleitung();
@@ -82,11 +89,7 @@ public class Steuerung {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-				dieGui.dasSchaubild.setxMin(Double.parseDouble(dieSkalierung.jtXmin.getText()));
-				dieGui.dasSchaubild.setxMax(Double.parseDouble(dieSkalierung.jtXmax.getText()));
-				dieGui.dasSchaubild.setyMin(Double.parseDouble(dieSkalierung.jtYmin.getText()));
-				dieGui.dasSchaubild.setyMax(Double.parseDouble(dieSkalierung.jtYmax.getText()));
-				dieGui.repaint();
+				gebeTextSkalierung();
 				
 			}
 		});
@@ -96,18 +99,8 @@ public class Steuerung {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				dieGui.dasSchaubild.setxMin(-10);
-				dieGui.dasSchaubild.setxMax(10);
-				dieGui.dasSchaubild.setyMin(-10);
-				dieGui.dasSchaubild.setyMax(10);
-				dieGui.repaint();
-				
-				dieSkalierung.jtXmin.setText("-10");
-				dieSkalierung.jtXmax.setText("10");
-				dieSkalierung.jtYmin.setText("-10");
-				dieSkalierung.jtYmax.setText("10");
-				
-				
+				setzeStandartSkalierung();
+							
 			}
 		});		
 	}
@@ -117,25 +110,27 @@ public class Steuerung {
 	
 	public void funktionsgleichungZerlegen(String gleichung) {
 		
-		int anzahlRechenzeichen = 0;
-		
+		int anzahlProdukte = 0;
+
 		ArrayList<Integer> indexe;
-		ArrayList<String> zerlegeStrings;
+		ArrayList<String>  zerlegeStrings;
+		
 		zerlegeStrings = new ArrayList<>();
-		indexe = new ArrayList<>();
+		indexe         = new ArrayList<>();
 		
-		char dieZiffern[] = gleichung.toCharArray();
+		char dieZeichen[] = gleichung.toCharArray();
 		
-		for (int i = 0; i < dieZiffern.length; i++) {
-			if (dieZiffern[i] == '+' || dieZiffern[i] == '-' ) {
-				anzahlRechenzeichen++;
+		for (int i = 0; i < dieZeichen.length; i++) {
+			if (dieZeichen[i] == '+' || dieZeichen[i] == '-' ) {
+				
+				anzahlProdukte++;
 				indexe.add(i);
 			}
 		}
 		
 		int alterindex = 0;
 			
-		for (int i = 0; i < anzahlRechenzeichen; i++) {
+		for (int i = 0; i < anzahlProdukte; i++) {
 		
 			String produkt = gleichung.substring(alterindex,indexe.get(i));
 			alterindex = indexe.get(i);
@@ -150,9 +145,8 @@ public class Steuerung {
 		
 	}
 	
-	
 	public String getFunktionsgleichungAusGui() {
-		
+
 		String s = dieGui.funktionsMenuPanel.jtfFunktion1.getText();
 		return s;
 		
@@ -160,13 +154,12 @@ public class Steuerung {
 	
 	public double berechneYWert(double x) {
 		
-		ArrayList<String> arrayList = new ArrayList<>();
-		arrayList = dieDaten.zerlegteProdukte;
+		ArrayList<String> dieProdukte = new ArrayList<>();
+		dieProdukte = dieDaten.zerlegteProdukte;
 		double ywert = 0.0;
 		
-		for (int i = 0; i < arrayList.size(); i++) {
-			
-			
+		for (int i = 0; i < dieProdukte.size(); i++) {
+				
 			try {
 				
 				double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
@@ -174,10 +167,12 @@ public class Steuerung {
 				
 			} catch (Exception e) {
 				
-			double exponent,konstante;
-			String skonstante,shochzahl;
-			String produkt = arrayList.get(i);
-			char[] charList =  produkt.toCharArray();
+			double exponent;
+			double konstante;
+			String skonstante;
+			String shochzahl;
+			String produkt   = dieProdukte.get(i);
+			char[] charList  =  produkt.toCharArray();
 					
 			for (int j = 0; j < charList.length; j++) {
 			
@@ -188,12 +183,14 @@ public class Steuerung {
 					 konstante = bestimmeKonstanteDesProdukts(skonstante);
 	                 exponent = bestimmeExponent(shochzahl);
 					 ywert = ywert + (berechneProduktZahlenWert(x,exponent, konstante));		  
-				} 		 			 
-				}	
-			}
-			}
-		return ywert;
-		}
+			      } 		
+			   }	
+		   }
+	   }
+		
+	   return ywert;
+		
+    }
 
 	  public double bestimmeExponent(String exponent) {
 		  
@@ -237,13 +234,17 @@ public class Steuerung {
 	
 	public double berechneProduktZahlenWert(double x,double hochzahl,double konstante) {
 	
-	double ywert; 	
+	double ywert;
     if (konstante == 0.0) {
+    	
      ywert = 0;
+     
 	} else {
-	ywert = konstante*Math.pow(x, hochzahl);
-	}	
-    return ywert; 
+
+	    ywert = konstante*Math.pow(x, hochzahl);
+	    
+	}   return ywert; 
+     
     }
 	
 	public double getEingegebenerXwert() {
@@ -254,7 +255,8 @@ public class Steuerung {
 		return variable;
 			
 		} catch (Exception e) {
-		  return 0;
+		  
+			return 0;
 		}
 		
 	}
@@ -329,4 +331,31 @@ public class Steuerung {
 	    String ableitung = String.join("", abgeleitereProdukte);
 		dieGui.dasAusgabefeld.jlAbleitung.setText("f'(x) = "+ableitung);
 	}
+	
+	public void gebeTextSkalierung() {
+		
+		dieGui.dasSchaubild.setxMin(Double.parseDouble(dieSkalierung.jtXmin.getText()));
+		dieGui.dasSchaubild.setxMax(Double.parseDouble(dieSkalierung.jtXmax.getText()));
+		dieGui.dasSchaubild.setyMin(Double.parseDouble(dieSkalierung.jtYmin.getText()));
+		dieGui.dasSchaubild.setyMax(Double.parseDouble(dieSkalierung.jtYmax.getText()));
+		dieGui.repaint();
+			
+	}
+	
+	public void setzeStandartSkalierung() {
+		
+		dieGui.dasSchaubild.setxMin(-10);
+		dieGui.dasSchaubild.setxMax(10);
+		dieGui.dasSchaubild.setyMin(-10);
+     	dieGui.dasSchaubild.setyMax(10);
+		dieGui.repaint();
+		dieSkalierung.jtXmin.setText("-10");
+		dieSkalierung.jtXmax.setText("10");
+		dieSkalierung.jtYmin.setText("-10");
+		dieSkalierung.jtYmax.setText("10");	
+	}
+	
+	
+	
+	
 }
