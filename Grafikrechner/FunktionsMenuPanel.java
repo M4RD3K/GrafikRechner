@@ -13,6 +13,7 @@ public class FunktionsMenuPanel extends JPanel {
 	JLabel jlFunktion1;
 	JLabel jlXwert1;
 	JLabel jlYwert1;
+	JFormattedTextField s1;
 
 	// JTextfield
 	JTextField jtfFunktion1;
@@ -34,12 +35,14 @@ public class FunktionsMenuPanel extends JPanel {
 		jlFunktion1 = new JLabel("  Funktion: ");
 		jlXwert1 = new JLabel("X-Wert: ");
 		jlYwert1 = new JLabel("Y-Wert:");
+		s1 = new JFormattedTextField();
 
 		// JButton Objekte
 		jbZeichne = new JButton("Zeichne");
 
 		// Objekte dem Panel zurodnen
 
+		
 		this.add(jlFunktion1);
 		this.add(jtfFunktion1);
 		this.add(jlXwert1);
@@ -50,13 +53,4 @@ public class FunktionsMenuPanel extends JPanel {
 		this.setBorder(new LineBorder(Color.BLACK));
 
 	}
-
-	public void setzteFokus() {
-
-		jbZeichne.requestFocus();
-		System.out.println("Fokus gesetzt");
-		this.revalidate();
-
-	}
-
 }

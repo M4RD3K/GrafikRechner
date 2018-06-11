@@ -63,7 +63,7 @@ public class Steuerung {
 			}
 		});
 		
-		dieGui.funktionsMenuPanel.jtfFunktion1.addActionListener(new ActionListener() {
+		dieGui.funktionsMenuPanel.jbZeichne.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -82,10 +82,7 @@ public class Steuerung {
 				dieSkalierung.setVisible(true);
 					
 			}
-			
-			
-	
-			
+				
 		});
 		
 		dieSkalierung.jButtonEinstellen.addActionListener(new ActionListener() {
@@ -163,34 +160,58 @@ public class Steuerung {
 		double ywert = 0.0;
 		
 		for (int i = 0; i < dieProdukte.size(); i++) {
-				
-			try {
-				
-				double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
-				ywert = ywert+konstante;
-				
-			} catch (Exception e) {
-				
-			double exponent;
-			double konstante;
-			String skonstante;
-			String shochzahl;
-			String produkt   = dieProdukte.get(i);
-			char[] charList  =  produkt.toCharArray();
-					
-			for (int j = 0; j < charList.length; j++) {
 			
-				 if (charList[j] =='x') {
-					
-					 skonstante = produkt.substring(0, j);
-					 shochzahl = produkt.substring(j,produkt.length());	 
-					 konstante = bestimmeKonstanteDesProdukts(skonstante);
-	                 exponent = bestimmeExponent(shochzahl);
-					 ywert = ywert + (berechneProduktZahlenWert(x,exponent, konstante));		  
-			      } 		
-			   }	
-		   }
-	   }
+			if (überprüfeFunktion(dieProdukte.get(i)) == false){
+				return 0;
+			}
+		
+				try {
+
+					double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
+					ywert = ywert + konstante;
+
+				} catch (Exception e) {
+
+					double exponent;
+					double konstante;
+					String skonstante;
+					String shochzahl;
+					String produkt = dieProdukte.get(i);
+					char[] charList = produkt.toCharArray();
+
+					if (produkt.contains("x")) {
+
+						for (int j = 0; j < charList.length; j++) {
+
+							if (charList[j] == 'x') {
+
+								skonstante = produkt.substring(0, j);
+								shochzahl = produkt.substring(j, produkt.length());
+								konstante = bestimmeKonstanteDesProdukts(skonstante);
+								exponent = bestimmeExponent(shochzahl);
+								ywert = ywert + (berechneProduktZahlenWert(x, exponent, konstante));
+
+							} 
+						}
+
+					} else if (produkt.contains("^")) {
+
+						for (int k = 0; k < charList.length; k++) {
+
+							if (charList[k] == '^') {
+
+								skonstante = produkt.substring(0, k);
+								konstante = bestimmeKonstanteDesProdukts(skonstante);
+								exponent = bestimmeExponent(produkt);
+								ywert = ywert + Math.pow(konstante, exponent);
+
+							}
+						}
+
+					} 
+				} 
+     
+  }
 		
 	   return ywert;
 		
@@ -200,14 +221,26 @@ public class Steuerung {
 		  
 		  double dExponent;
 		  
+		  
 		  if (exponent.contains("^")){
 			
-		  char arrey[] = exponent.toCharArray();
-          char hochzahl = arrey[arrey.length-1];
-		  String sExponent = Character.toString(hochzahl) ;	
-		  dExponent = Double.parseDouble(sExponent);
-		  return dExponent;
-		  
+		    char[] liste = exponent.toCharArray();
+		    
+		    int index = 0;
+		    
+		    for (int i = 0; i < liste.length; i++) {
+				
+		    	   if (liste[i] == '^') {
+					
+		    		   index = i;
+		    		   
+				}
+		    	   
+			}
+			
+		    exponent = exponent.substring(index+1,exponent.length());
+		    dExponent = Double.parseDouble(exponent);
+		    return dExponent;
 		} 
 		 
 		 dExponent = 1.0;
@@ -221,7 +254,7 @@ public class Steuerung {
 		int index =1;
 		double dkonstante = 0.0;
 		double nenner;
-		double z�hler;
+		double zähler;
 		
 		if(skonstante.contains("/")) {
 			
@@ -237,9 +270,9 @@ public class Steuerung {
 			}
 			
 			nenner = Double.parseDouble(skonstante.substring(0,index));
-			z�hler = Double.parseDouble(skonstante.substring(index+1,skonstante.length()));
+			zähler = Double.parseDouble(skonstante.substring(index+1,skonstante.length()));
 			
-			dkonstante = z�hler/nenner;
+			dkonstante = nenner/zähler;
 			return dkonstante;
 			
 		}
@@ -258,7 +291,6 @@ public class Steuerung {
 				dkonstante = Double.parseDouble(skonstante);	
 			}
 		}
-		System.out.println(dkonstante);
 		
 		return dkonstante;
 		
@@ -402,7 +434,24 @@ public class Steuerung {
 		dieSkalierung.jtYmax.setText("10");	
 	}
 	
-	
+  public boolean überprüfeFunktion(String funktion){
+	  
+	  if (funktion.contains(",")) {
+		  return false;
+	  }
+	 
+	  if (funktion == "") {
+		return false;
+	  }
+  
+	  if (funktion.contains("^x")) {
+		return false;
+	  }
+	   if (funktion.endsWith("-")) {
+		return false;
+	}
+	 return true; 
+  }	
 	
 	
 }
