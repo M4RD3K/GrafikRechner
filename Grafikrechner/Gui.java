@@ -50,6 +50,8 @@ public class Gui extends JFrame {
     	  this.setSize(600,600);;
     	  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     	  this.setTitle("Grafikrechner");
+    	  funktionsMenuPanel.setzteFokus();
+    	
     	  
 	}
 	

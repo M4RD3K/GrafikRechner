@@ -123,7 +123,8 @@ public class Schaubild extends JPanel {
 			g.drawLine((int)(i*xSkalierung),(int)(yMax*ySkalierung), (int)(i*xSkalierung),(int)(yMax*ySkalierung+10)) ;
 		}
 		g.setColor(new Color(65, 105, 225));
-		if(dieGui.funktionsMenuPanel.jtfFunktion1.getText().equals("")) {g.setColor(new Color(0, 0, 0));
+		if(dieGui.funktionsMenuPanel.jtfFunktion1.getText().equals("")) {
+			g.setColor(new Color(0, 0, 0));
 			
 		}
 		g.drawPolyline(xPunkte, yPunkte, xWerte.length);

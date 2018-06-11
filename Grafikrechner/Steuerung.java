@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.security.auth.DestroyFailedException;
+import javax.security.auth.kerberos.KerberosKey;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
 public class Steuerung {
@@ -49,7 +52,8 @@ public class Steuerung {
 			}
 		});
 		
-		dieGui.funktionsMenuPanel.jbBerechne.addActionListener(new ActionListener() {
+		
+		dieGui.funktionsMenuPanel.jtfXwert1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {	
@@ -58,15 +62,15 @@ public class Steuerung {
 				
 			}
 		});
-		dieGui.dasAusgabefeld.jbZeichneFunktion.addActionListener(new ActionListener() {
+		
+		dieGui.funktionsMenuPanel.jtfFunktion1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				funktionsgleichungZerlegen(getFunktionsgleichungAusGui());
 				dieGui.repaint();
-				bestimeAbleitung();
-				
+	
 			}
 		});
 		
@@ -212,7 +216,33 @@ public class Steuerung {
 	  
 	public double bestimmeKonstanteDesProdukts(String skonstante) {
 
+		
+		
+		int index =1;
 		double dkonstante = 0.0;
+		double nenner;
+		double zähler;
+		
+		if(skonstante.contains("/")) {
+			
+			char[] list = skonstante.toCharArray();
+			
+			for (int i = 0; i < list.length; i++) {
+				
+				if (list[i] == '/') {
+					
+					index = i;
+					
+				}
+			}
+			
+			nenner = Double.parseDouble(skonstante.substring(0,index));
+			zähler = Double.parseDouble(skonstante.substring(index+1,skonstante.length()));
+			
+			dkonstante = zähler/nenner;
+			return dkonstante;
+			
+		}
 		
 		if (skonstante.equals("")) {
 			return 1;
@@ -228,6 +258,8 @@ public class Steuerung {
 				dkonstante = Double.parseDouble(skonstante);	
 			}
 		}
+		System.out.println(dkonstante);
+		
 		return dkonstante;
 		
 	} 
@@ -313,13 +345,23 @@ public class Steuerung {
 						
 					} if (neuExponent == 1 && neuKonstante == 1) {
 				    
-					 ableitungProdukt ="x"; }
+					 ableitungProdukt ="+x"; }
 					
 					 if (neuExponent == 0 && neuKonstante == 1) {
 						    
-					 ableitungProdukt ="1"; }					
+					 ableitungProdukt ="1"; }
+					 if(neuExponent == 0 && neuKonstante>=0) {
+						 
+						 ableitungProdukt = "+"+format.format(neuKonstante);
+						 
+					 }	 if(neuExponent == 0 && neuKonstante<0) {
+						 
+						 ableitungProdukt = format.format(neuKonstante);
+						 
+					 }				
 					 abgeleitereProdukte.add(ableitungProdukt);
 					
+				      
 				    } 
 
 				}	
@@ -329,6 +371,11 @@ public class Steuerung {
 		}
 		
 	    String ableitung = String.join("", abgeleitereProdukte);
+	    
+	    if (ableitung.startsWith("+")) {
+			ableitung = ableitung.substring(1,ableitung.length());
+		}
+	    
 		dieGui.dasAusgabefeld.jlAbleitung.setText("f'(x) = "+ableitung);
 	}
 	
