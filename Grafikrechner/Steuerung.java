@@ -161,7 +161,7 @@ public class Steuerung {
 		
 		for (int i = 0; i < dieProdukte.size(); i++) {
 			
-			if (überprüfeFunktion(dieProdukte.get(i)) == false){
+			if (ueberpruefeFunktion(dieProdukte.get(i)) == false){
 				return 0;
 			}
 		
@@ -254,7 +254,7 @@ public class Steuerung {
 		int index =1;
 		double dkonstante = 0.0;
 		double nenner;
-		double zähler;
+		double zaeler;
 		
 		if(skonstante.contains("/")) {
 			
@@ -270,9 +270,9 @@ public class Steuerung {
 			}
 			
 			nenner = Double.parseDouble(skonstante.substring(0,index));
-			zähler = Double.parseDouble(skonstante.substring(index+1,skonstante.length()));
+			zaeler = Double.parseDouble(skonstante.substring(index+1,skonstante.length()));
 			
-			dkonstante = nenner/zähler;
+			dkonstante = nenner/zaeler;
 			return dkonstante;
 			
 		}
@@ -434,7 +434,7 @@ public class Steuerung {
 		dieSkalierung.jtYmax.setText("10");	
 	}
 	
-  public boolean überprüfeFunktion(String funktion){
+  public boolean ueberpruefeFunktion(String funktion){
 	  
 	  if (funktion.contains(",")) {
 		  return false;
