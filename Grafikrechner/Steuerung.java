@@ -172,14 +172,44 @@ public class Steuerung {
 
 				} catch (Exception e) {
 
+					double trigomemetrie = 0;
 					double exponent;
 					double konstante;
 					String skonstante;
 					String shochzahl;
 					String produkt = dieProdukte.get(i);
 					char[] charList = produkt.toCharArray();
+					
+					
+                   if (produkt.contains("sin(x)")) {
+						
+						for (int j = 0; j < charList.length; j++) {
+							
+							if (charList[j] == 's') {
+								
+								skonstante = produkt.substring(0,j);
+								konstante = bestimmeKonstanteDesProdukts(skonstante);
+								trigomemetrie = konstante*Math.sin(x);
+								ywert =  ywert + trigomemetrie;
+							} 									
+						}
+						
+					} else if (produkt.contains("cos(x)")) {
+						
+                         for (int j = 0; j < charList.length; j++) {
+							
+							if (charList[j] == 'c') {
+								
+								skonstante = produkt.substring(0,j);
+								konstante = bestimmeKonstanteDesProdukts(skonstante);
+								System.out.println(konstante);
+								trigomemetrie = konstante*Math.cos(x);
+								ywert = ywert +trigomemetrie;
+							} 	
 
-					if (produkt.contains("x")) {
+                         }		
+							
+					} else if (produkt.contains("x")) {
 
 						for (int j = 0; j < charList.length; j++) {
 
@@ -210,7 +240,6 @@ public class Steuerung {
 
 					} 
 				} 
-     
   }
 		
 	   return ywert;
@@ -248,13 +277,11 @@ public class Steuerung {
 	  }
 	  
 	public double bestimmeKonstanteDesProdukts(String skonstante) {
-
-		
-		
 		int index =1;
 		double dkonstante = 0.0;
 		double nenner;
 		double zaeler;
+		
 		
 		if(skonstante.contains("/")) {
 			
@@ -291,7 +318,6 @@ public class Steuerung {
 				dkonstante = Double.parseDouble(skonstante);	
 			}
 		}
-		
 		return dkonstante;
 		
 	} 
@@ -437,21 +463,36 @@ public class Steuerung {
   public boolean ueberpruefeFunktion(String funktion){
 	  
 	  if (funktion.contains(",")) {
+		  setzeFehler();
+		  return false;	  
+	  } 
+	  if (funktion == "") {
+		  setzeFehler();
 		  return false;
 	  }
-	 
-	  if (funktion == "") {
-		return false;
-	  }
-  
 	  if (funktion.contains("^x")) {
-		return false;
+		  setzeFehler();
+		  return false;
 	  }
 	   if (funktion.endsWith("-")) {
-		return false;
+		  setzeFehler();
+		  return false;
+	}  if (funktion.contains("x") == false) {
+		  setzeFehler();
+	      return false;
+	}  if (funktion.startsWith("-")) {
+		return true;
 	}
 	 return true; 
   }	
 	
+  
+  public void setzeFehler() {
+	  
+	  dieGui.funktionsMenuPanel.jtfFunktion1.setText("Fehler");
+	  
+	  
+	  
+  }
 	
 }

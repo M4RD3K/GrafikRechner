@@ -87,11 +87,6 @@ public class Schaubild extends JPanel {
 			
 		}
 		
-		
-		
-		
-		//g.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
-		//g.drawLine(this.getWidth()/2, 0, this.getWidth()/2, this.getHeight());
 		g.setColor(new Color(239, 238, 238));
 		for (int i = 0; i < xMax-xMin; i++) {
 			if(i+xMin==0) {
