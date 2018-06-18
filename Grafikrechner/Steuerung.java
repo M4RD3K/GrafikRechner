@@ -160,10 +160,6 @@ public class Steuerung {
 		double ywert = 0.0;
 		
 		for (int i = 0; i < dieProdukte.size(); i++) {
-			
-			if (ueberpruefeFunktion(dieProdukte.get(i)) == false){
-				return 0;
-			}
 		
 				try {
 
@@ -202,7 +198,6 @@ public class Steuerung {
 								
 								skonstante = produkt.substring(0,j);
 								konstante = bestimmeKonstanteDesProdukts(skonstante);
-								System.out.println(konstante);
 								trigomemetrie = konstante*Math.cos(x);
 								ywert = ywert +trigomemetrie;
 							} 	
@@ -373,6 +368,7 @@ public class Steuerung {
 				
 			} catch (Exception e) {
 			
+			String abgeleiteteTrigometire = "";
 			double exponent,konstante;
 			double neuExponent,neuKonstante;
 			String skonstante,shochzahl,ableitung;
@@ -380,8 +376,53 @@ public class Steuerung {
 			char[] charList =  produkt.toCharArray();
 					
 			for (int j = 0; j < charList.length; j++) {
-			
-				 if (charList[j] =='x') {
+				
+				
+				
+				 if (produkt.contains("sin(x)")) {
+					 
+				     if (charList[j] == 's') {
+						
+				    	 skonstante = produkt.substring(0,j);
+				    	 konstante = bestimmeKonstanteDesProdukts(skonstante);
+				    	 abgeleiteteTrigometire = format.format(konstante)+"cos(x)";
+				    	 
+				    	 if (konstante > 1 || konstante > 0 && konstante< 1) {
+								abgeleiteteTrigometire = "+"+format.format(konstante)+"cos(x)";
+							}
+				    	 
+				    	 if (konstante == 1) {
+							abgeleiteteTrigometire = "+cos(x)";
+						}
+				   }
+				    	 
+				    	 abgeleitereProdukte.add(abgeleiteteTrigometire);
+				    	
+					} else if (produkt.contains("cos(x)")) {
+						 
+					     if (charList[j] == 'c') {
+							
+					    	 skonstante = produkt.substring(0,j);
+					    	 konstante = bestimmeKonstanteDesProdukts(skonstante);
+					    	 konstante = konstante*-1;
+					    	 abgeleiteteTrigometire = format.format(konstante)+"sin(x)";
+					    	 
+					    	 if (konstante > 1 || konstante > 0 && konstante< 1) {
+									abgeleiteteTrigometire = "+"+format.format(konstante)+"sin(x)";
+								}
+					    	 
+					    	 if (konstante == 1) {
+								abgeleiteteTrigometire = "+sin(x)";
+							}
+					    	 
+					    	 abgeleitereProdukte.add(abgeleiteteTrigometire);
+					    	
+						}
+				     
+				   
+					 
+					
+				} else if (charList[j] =='x') {
 					 String ableitungProdukt = "";
 					 skonstante = produkt.substring(0, j);
 					 shochzahl = produkt.substring(j,produkt.length());	 

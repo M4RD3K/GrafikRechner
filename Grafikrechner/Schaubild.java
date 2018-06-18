@@ -24,6 +24,7 @@ public class Schaubild extends JPanel {
 	private int yPunkte[];
 	private double xWerte[];
 	private double yWerte[];
+	private String zahl;
 	Gui dieGui;
 	
 	public double getxMin() {
@@ -90,8 +91,7 @@ public class Schaubild extends JPanel {
 		g.setColor(new Color(239, 238, 238));
 		for (int i = 0; i < xMax-xMin; i++) {
 			if(i+xMin==0) {
-				g.setColor(new Color(0, 0, 0));
-				
+				g.setColor(new Color(0, 0, 0));				
 				g.drawLine((int)(i*xSkalierung),0, (int)(i*xSkalierung), this.getHeight());
 				g.setColor(new Color(239, 238, 238));
 			}else {	g.drawLine((int)(i*xSkalierung),0, (int)(i*xSkalierung), this.getHeight());
@@ -111,11 +111,18 @@ public class Schaubild extends JPanel {
 			
 			g.setColor(new Color(0, 0, 0));
 			g.drawLine((int)(-xMin*xSkalierung-10),(int)(i*ySkalierung), (int)(-xMin*xSkalierung), (int)(i*ySkalierung));
+			if(yMax-i==0) {}else {
+			g.drawString(""+(int)(yMax-i),(int)(-xMin*xSkalierung+5) ,(int)(i*ySkalierung+5) );
+			}
+			
 		}
 		for (int i = 0; i < xMax-xMin; i++) {
 			
 			g.setColor(new Color(0, 0, 0));
 			g.drawLine((int)(i*xSkalierung),(int)(yMax*ySkalierung), (int)(i*xSkalierung),(int)(yMax*ySkalierung+10)) ;
+			if(xMin+i==0) {}else {
+				g.drawString(""+(int)(xMin+i),(int)(i*xSkalierung-3) , (int)(yMax*ySkalierung-5));
+				}
 		}
 		g.setColor(new Color(65, 105, 225));
 		if(dieGui.funktionsMenuPanel.jtfFunktion1.getText().equals("")) {
@@ -123,7 +130,11 @@ public class Schaubild extends JPanel {
 			
 		}
 		g.drawPolyline(xPunkte, yPunkte, xWerte.length);
-		
+		if(dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("a")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("z")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("z")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("q")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("w")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("r")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("t")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("u")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("p")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ü")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ä")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ö")) {
+			g.setColor(new Color(0,0,0));
+			g.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
+			//g.drawString("Fehler", 50, 50);
+		}
 	}
 
 }
