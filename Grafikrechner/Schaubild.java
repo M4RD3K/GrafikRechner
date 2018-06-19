@@ -3,7 +3,10 @@ package Grafikrechner;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -25,6 +28,7 @@ public class Schaubild extends JPanel {
 	private double xWerte[];
 	private double yWerte[];
 	private String zahl;
+	BufferedImage img = null;
 	Gui dieGui;
 	
 	public double getxMin() {
@@ -62,7 +66,11 @@ public class Schaubild extends JPanel {
 		Graphics2D g = (Graphics2D) arg0;
 		
 		super.paintComponent(g);
-		
+		try {
+			img = ImageIO.read(getClass().getResourceAsStream("/GCN5ybe.jpg"));
+		} catch (Exception e) {
+			
+		}
 		
 		xPunkte = new int[this.getWidth()];
 		yPunkte = new int[xPunkte.length];
@@ -134,6 +142,10 @@ public class Schaubild extends JPanel {
 			g.setColor(new Color(0,0,0));
 			g.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
 			//g.drawString("Fehler", 50, 50);
+		}
+		if(dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("eclipse")) {
+			g.setColor(Color.RED);
+			g.drawImage(img, 0,0,null);
 		}
 	}
 
