@@ -15,15 +15,9 @@ public class Anleitung extends JFrame {
 	JLabel jlAnleitung;
 	
 	public Anleitung() {
-	
-		jlAnleitung = new JLabel("Willkomme in der Anleitung"
-				+ "Bisher unterstüzen wir in der Beta version "
-				+ "nur Ganzrationale Funktionen bis zum 9. Grad"
-				+ "es dürfen nur funktionsgleichungen ohne Brüche und klammern"
-				+ "eingegeben werden. Für kommata bitte den punkt Operator verwenden");
-	 	
 		
 	 //Objekte Bauen und einstellen
+     jlAnleitung = new JLabel("Anleitung");
 	 jPAnleitung = new JPanel(new BorderLayout());	
 	 jPAnleitung.setBorder(new TitledBorder("Anleitung:"));
 	 jPAnleitung.setBackground(Color.WHITE);

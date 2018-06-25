@@ -26,14 +26,12 @@ public class UnsereMenuBar extends JMenuBar {
 	   //JMenuItem
 	   jmiAnleitung = new JMenuItem("Anleitung");
 	   jmiSkalierungEinstellen = new JMenuItem("Skalierung Einstellen");
-	   jmiUeber = new JMenuItem("Über");
 	   
 	   
 	   //JMenu menuitems zuweisen 
 	   jmskalierung.add(jmiSkalierungEinstellen);
 	   jmHilfe.add(jmiAnleitung);
 	   jmHilfe.addSeparator();
-	   jmHilfe.add(jmiUeber);
 	   
 	   //JMenu in die Menubar hinzufügen
 	   this.add(jmskalierung);

@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Daten {
 
-   ArrayList<String> zerlegteProdukte;
-   ArrayList<String> zerlegteProdukteAbleitung;
+   ArrayList<String> zerlegteProdukte; 
 
    public Daten() {
 	   	   
 	   zerlegteProdukte = new ArrayList<>();
-	   zerlegteProdukteAbleitung = new ArrayList<>();
 	   
    }	
 	

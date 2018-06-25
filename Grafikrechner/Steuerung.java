@@ -11,16 +11,24 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
+/**
+ * Dies ist die wichtigste Klasse des Programms. Sie Kümmert sich um die Berechnungen und Zerlegung der Funktionen.
+ * Gleichzeitig stellt sie auch die Verbindung mit der Gui und damit diese die Funktion zeichnen kann.  
+ *
+ * */
+
 public class Steuerung {
 
-	//Assosationen deklarieren
 	Gui dieGui;
 	Daten dieDaten;
 	Anleitung dieAnleitung;
 	Skalierung dieSkalierung;
 	DecimalFormat format;
 	
-	//Konstruktor 
+	/**
+	 * Im Konstruktur werden die Listner der Buttons gesetzt, welche die jeweilige gewollte Funktion des Buttons ausführen
+	 */
+	
 	public Steuerung() {
 	
 		dieSkalierung = new Skalierung();
@@ -28,26 +36,15 @@ public class Steuerung {
 		dieGui.setVisible(true);
 		dieDaten = new Daten();
 		
-		
-		//Objekt um das Format der Double Werte anzupassen
 		format = new DecimalFormat();
 		format.setDecimalSeparatorAlwaysShown(false);
 	
-		//Actionlistner der Buttons 
 		dieGui.dasAusgabefeld.jbAbleiten.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
 				bestimeAbleitung();
-			}
-		});
-		dieGui.dasAusgabefeld.jbNullstellen.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				findeNullstelle(0);
-				
 			}
 		});
 		
@@ -114,44 +111,12 @@ public class Steuerung {
 		});		
 	}
 	
-
-	
-public void funktionsgleichungAbleitungZerlegen(String gleichung) {
-		
-		int anzahlProdukte = 0;
-
-		ArrayList<Integer> indexe;
-		ArrayList<String>  zerlegeStrings;
-		
-		zerlegeStrings = new ArrayList<>();
-		indexe         = new ArrayList<>();
-		
-		char dieZeichen[] = gleichung.toCharArray();
-		
-		for (int i = 0; i < dieZeichen.length; i++) {
-			if (dieZeichen[i] == '+' || dieZeichen[i] == '-' ) {
-				
-				anzahlProdukte++;
-				indexe.add(i);
-			}
-		}
-		
-		int alterindex = 0;
-			
-		for (int i = 0; i < anzahlProdukte; i++) {
-		
-			String produkt = gleichung.substring(alterindex,indexe.get(i));
-			alterindex = indexe.get(i);
-			zerlegeStrings.add(produkt);
-			
-		}
-		
-		String letztesProdukt = gleichung.substring(alterindex);
-		zerlegeStrings.add(letztesProdukt);
-		
-		dieDaten.zerlegteProdukteAbleitung = zerlegeStrings;
-		
-	}
+    /**
+     *In der Methode funktionsgleichungZerlegen wird die eingegebene Funktion nach den Rechenzeichen 
+     *der Addition und Subtraktion zerlegt. Beispielsweise 2x^2-3x wird zerlegt in 2x^2 und 3x.
+     *Diese Zerlegten Strings werden dann in eine ArrayList gespreichert, die in der Datenklasse übergeben wird.
+     *@param gleichung dies ist die eingegebene Funktionsgleichung aus der Gui
+     */
 	public void funktionsgleichungZerlegen(String gleichung) {
 		
 		int anzahlProdukte = 0;
@@ -196,6 +161,13 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		
 	}
 	
+	/**
+	 *In der berechneYWert Methode wird der Y-Wert für einen bestimmten Zahlenwert berechnet. Dabei ruft die Methode die Daten
+	 *der Zerlegten Funktionsgleichung ab und berechnet für jede Funktion einen Y-Wert. Dieser Y-Wert wird dann mit dem des vorherigen
+	 *adidert. Die Methode ist dann komplett durchgelafen sobald der Y-Wert für alle Funktionen berechnet wurde. 
+	 *@param x ist die Zahl die in die Funktion eingesetzt wird. 
+	 *@return wird dann der Y-Wert in Form einer Kommazahl zurück gegeben. 
+	 */
 	public double berechneYWert(double x) {
 		
 		ArrayList<String> dieProdukte = new ArrayList<>();
@@ -207,7 +179,6 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 				try {
 
 					double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
-					System.out.println(konstante);
 					if (konstante == 1) {
 						
 						ywert = ywert+0;
@@ -292,8 +263,15 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 	   return ywert;
 		
     }
-
-	  public double bestimmeExponent(String exponent) {
+	
+	
+   /**
+    * In der Methode bestimmeExponent wird bestimmt welcher Funktionsgrad vorliegt. Dabei wird die Jeweilige Funktion, nach einem Hochtzeichen (^)
+    * untersucht und danach anhand der gefundenen stelle, die Hochzahl bestimmt und als Kommazahl umformatiert.
+    * @param exponent enthält den String von dem der Exponent bestimmt werden soll. 
+    * @return ist der Gefundene Exponent. 
+    */
+	public double bestimmeExponent(String exponent) {
 		  
 		  double dExponent;
 		  
@@ -322,118 +300,13 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		 dExponent = 1.0;
 		 return dExponent;	  
 	  }
-	  
-	  public void findeNullstelle(double x) {
-		  int iterationen= 1000000;
-		  double xneu=0;
-		  double xalt= x;
-		  for(int i=0;i<=iterationen;i++) {
-			  xneu = xalt-(berechneYWert(xalt/berechneYWertAbleitung(xalt)));
-			  xalt = xneu;
-		  }
-		  dieGui.dasAusgabefeld.jlNullstelle.setText("Nullstelle: ("+xneu+"/"+berechneYWert(xneu)+")");
-	  }
-	  
-	  
-	  
-	  public double berechneYWertAbleitung(double x) {
-			
-			ArrayList<String> dieProdukte = new ArrayList<>();
-			dieProdukte = dieDaten.zerlegteProdukteAbleitung;
-			double ywert = 0.0;
-			
-			for (int i = 0; i < dieProdukte.size(); i++) {
-			
-					try {
-
-						double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukteAbleitung.get(i));
-						System.out.println(konstante);
-						if (konstante == 1) {
-							
-							ywert = ywert+0;
-							
-						} else {
-							
-							ywert = ywert + konstante;
-						}
-					
-
-					} catch (Exception e) {
-
-						double trigomemetrie = 0;
-						double exponent;
-						double konstante;
-						String skonstante;
-						String shochzahl;
-						String produkt = dieProdukte.get(i);
-						char[] charList = produkt.toCharArray();
-						
-						
-	                   if (produkt.contains("sin(x)")) {
-							
-							for (int j = 0; j < charList.length; j++) {
-								
-								if (charList[j] == 's') {
-									
-									skonstante = produkt.substring(0,j);
-									konstante = bestimmeKonstanteDesProdukts(skonstante);
-									trigomemetrie = konstante*Math.sin(x);
-									ywert =  ywert + trigomemetrie;
-								} 									
-							}
-							
-						} else if (produkt.contains("cos(x)")) {
-							
-	                         for (int j = 0; j < charList.length; j++) {
-								
-								if (charList[j] == 'c') {
-									
-									skonstante = produkt.substring(0,j);
-									konstante = bestimmeKonstanteDesProdukts(skonstante);
-									trigomemetrie = konstante*Math.cos(x);
-									ywert = ywert +trigomemetrie;
-								} 	
-
-	                         }		
-								
-						} else if (produkt.contains("x")) {
-
-							for (int j = 0; j < charList.length; j++) {
-
-								if (charList[j] == 'x') {
-
-									skonstante = produkt.substring(0, j);
-									shochzahl = produkt.substring(j, produkt.length());
-									konstante = bestimmeKonstanteDesProdukts(skonstante);
-									exponent = bestimmeExponent(shochzahl);
-									ywert = ywert + (berechneProduktZahlenWert(x, exponent, konstante));
-
-								} 
-							}
-
-						} else if (produkt.contains("^")) {
-
-							for (int k = 0; k < charList.length; k++) {
-
-								if (charList[k] == '^') {
-
-									skonstante = produkt.substring(0, k);
-									konstante = bestimmeKonstanteDesProdukts(skonstante);
-									exponent = bestimmeExponent(produkt);
-									ywert = ywert + Math.pow(konstante, exponent);
-
-								}
-							}
-
-						} 
-					} 
-	  }
-			
-		   return ywert;
-			
-	    }
-
-	  
+	
+	/**
+	 * Die Methode bestimmeKonstanteDesProduktes bestimmt die Jeweilige Konstante eines einzelnen Produktes. 
+	 * Beispielsweise bei 3x^2 ist die Konstante 3. 
+	 * @param skonstante ist der String der die jeweilige Konstante enthält. 
+	 * @return wird die Konstante zurück gegeben. 
+	 */  
 	public double bestimmeKonstanteDesProdukts(String skonstante) {
 		int index =1;
 		double dkonstante = 0.0;
@@ -480,6 +353,14 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		
 	} 
 	
+	/**
+	 * Die Methode berechnePrdouktZahlenWert berechnet den Jeweiligen Zahlenwert der sich aus einer Funktion ergibt,
+	 * wenn man in diese ein bestimmtes x einsetzt. Dabei wird die bestimmte Konstante mit dem jeweiligen X-Wert und seiner Hochzahl multipliziert.
+	 * @param x ist die Zahl die in die Funktion eingesetzt wird 
+	 * @param hochzahl ist die vorher bestimmte Hochzahl aus  der Methode bestimmeExponetDesProdukes.
+	 * @param konstante ist die vorher bestimme Konstante asu der Methode bestimmeKonstanteDesProduktes.
+	 * @return ist der brechnete Zahlenwert
+	 */
 	public double berechneProduktZahlenWert(double x,double hochzahl,double konstante) {
 	
 	double ywert;
@@ -645,7 +526,7 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 	    if (ableitung.startsWith("+")) {
 			ableitung = ableitung.substring(1,ableitung.length());
 		}
-	    funktionsgleichungAbleitungZerlegen(ableitung);
+	    
 		dieGui.dasAusgabefeld.jlAbleitung.setText("f'(x) = "+ableitung);
 	}
 	
@@ -672,7 +553,7 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		dieSkalierung.jtYmax.setText("10");	
 	}
 	
-  public boolean ueberpruefeFunktion(String funktion){
+    public boolean ueberpruefeFunktion(String funktion){
 	  
 	  if (funktion.contains(",")) {
 		  setzeFehler();
@@ -697,9 +578,8 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 	}
 	 return true; 
   }	
-	
-  
-  public void setzeFehler() {
+	  
+    public void setzeFehler() {
 	  
 	  dieGui.funktionsMenuPanel.jtfFunktion1.setText("Fehler");
 	  
