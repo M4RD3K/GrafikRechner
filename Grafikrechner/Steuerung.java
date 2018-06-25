@@ -42,6 +42,14 @@ public class Steuerung {
 				bestimeAbleitung();
 			}
 		});
+		dieGui.dasAusgabefeld.jbNullstellen.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				findeNullstelle(0);
+				
+			}
+		});
 		
 		dieGui.unserMenu.jmiAnleitung.addActionListener(new ActionListener() {
 			
@@ -108,7 +116,42 @@ public class Steuerung {
 	
 
 	
-	
+public void funktionsgleichungAbleitungZerlegen(String gleichung) {
+		
+		int anzahlProdukte = 0;
+
+		ArrayList<Integer> indexe;
+		ArrayList<String>  zerlegeStrings;
+		
+		zerlegeStrings = new ArrayList<>();
+		indexe         = new ArrayList<>();
+		
+		char dieZeichen[] = gleichung.toCharArray();
+		
+		for (int i = 0; i < dieZeichen.length; i++) {
+			if (dieZeichen[i] == '+' || dieZeichen[i] == '-' ) {
+				
+				anzahlProdukte++;
+				indexe.add(i);
+			}
+		}
+		
+		int alterindex = 0;
+			
+		for (int i = 0; i < anzahlProdukte; i++) {
+		
+			String produkt = gleichung.substring(alterindex,indexe.get(i));
+			alterindex = indexe.get(i);
+			zerlegeStrings.add(produkt);
+			
+		}
+		
+		String letztesProdukt = gleichung.substring(alterindex);
+		zerlegeStrings.add(letztesProdukt);
+		
+		dieDaten.zerlegteProdukteAbleitung = zerlegeStrings;
+		
+	}
 	public void funktionsgleichungZerlegen(String gleichung) {
 		
 		int anzahlProdukte = 0;
@@ -279,6 +322,117 @@ public class Steuerung {
 		 dExponent = 1.0;
 		 return dExponent;	  
 	  }
+	  
+	  public void findeNullstelle(double x) {
+		  int iterationen= 1000000;
+		  double xneu=0;
+		  double xalt= x;
+		  for(int i=0;i<=iterationen;i++) {
+			  xneu = xalt-(berechneYWert(xalt/berechneYWertAbleitung(xalt)));
+			  xalt = xneu;
+		  }
+		  dieGui.dasAusgabefeld.jlNullstelle.setText("Nullstelle: ("+xneu+"/"+berechneYWert(xneu)+")");
+	  }
+	  
+	  
+	  
+	  public double berechneYWertAbleitung(double x) {
+			
+			ArrayList<String> dieProdukte = new ArrayList<>();
+			dieProdukte = dieDaten.zerlegteProdukteAbleitung;
+			double ywert = 0.0;
+			
+			for (int i = 0; i < dieProdukte.size(); i++) {
+			
+					try {
+
+						double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukteAbleitung.get(i));
+						System.out.println(konstante);
+						if (konstante == 1) {
+							
+							ywert = ywert+0;
+							
+						} else {
+							
+							ywert = ywert + konstante;
+						}
+					
+
+					} catch (Exception e) {
+
+						double trigomemetrie = 0;
+						double exponent;
+						double konstante;
+						String skonstante;
+						String shochzahl;
+						String produkt = dieProdukte.get(i);
+						char[] charList = produkt.toCharArray();
+						
+						
+	                   if (produkt.contains("sin(x)")) {
+							
+							for (int j = 0; j < charList.length; j++) {
+								
+								if (charList[j] == 's') {
+									
+									skonstante = produkt.substring(0,j);
+									konstante = bestimmeKonstanteDesProdukts(skonstante);
+									trigomemetrie = konstante*Math.sin(x);
+									ywert =  ywert + trigomemetrie;
+								} 									
+							}
+							
+						} else if (produkt.contains("cos(x)")) {
+							
+	                         for (int j = 0; j < charList.length; j++) {
+								
+								if (charList[j] == 'c') {
+									
+									skonstante = produkt.substring(0,j);
+									konstante = bestimmeKonstanteDesProdukts(skonstante);
+									trigomemetrie = konstante*Math.cos(x);
+									ywert = ywert +trigomemetrie;
+								} 	
+
+	                         }		
+								
+						} else if (produkt.contains("x")) {
+
+							for (int j = 0; j < charList.length; j++) {
+
+								if (charList[j] == 'x') {
+
+									skonstante = produkt.substring(0, j);
+									shochzahl = produkt.substring(j, produkt.length());
+									konstante = bestimmeKonstanteDesProdukts(skonstante);
+									exponent = bestimmeExponent(shochzahl);
+									ywert = ywert + (berechneProduktZahlenWert(x, exponent, konstante));
+
+								} 
+							}
+
+						} else if (produkt.contains("^")) {
+
+							for (int k = 0; k < charList.length; k++) {
+
+								if (charList[k] == '^') {
+
+									skonstante = produkt.substring(0, k);
+									konstante = bestimmeKonstanteDesProdukts(skonstante);
+									exponent = bestimmeExponent(produkt);
+									ywert = ywert + Math.pow(konstante, exponent);
+
+								}
+							}
+
+						} 
+					} 
+	  }
+			
+		   return ywert;
+			
+	    }
+
 	  
 	public double bestimmeKonstanteDesProdukts(String skonstante) {
 		int index =1;
@@ -491,7 +645,7 @@ public class Steuerung {
 	    if (ableitung.startsWith("+")) {
 			ableitung = ableitung.substring(1,ableitung.length());
 		}
-	    
+	    funktionsgleichungAbleitungZerlegen(ableitung);
 		dieGui.dasAusgabefeld.jlAbleitung.setText("f'(x) = "+ableitung);
 	}
 	
