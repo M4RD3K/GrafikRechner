@@ -1,0 +1,44 @@
+%Hauptdokument
+
+\documentclass[11pt]{article}
+
+
+\input{02_E_Vorspann}
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\author{Lars Strölin, Michael Geigges, Ilja Kononenko} 
+\title{Grafikrechner Entwicklerdokumentation} 
+\date{10. Juli 2018} 
+\maketitle
+
+\setcounter{page}{1}
+
+%Titelbild
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{Bilder/GR_1.jpg}
+	\caption{Grafikrechner}
+\end{figure}
+
+\end{titlepage}
+
+
+\tableofcontents
+\newpage
+
+
+%Ausgelagerte Elemente
+\include{03_E_Vorwort}
+\include{04_E_Aufbau}
+%\include{05_Funktion}
+\include{06_E_Schluss}
+
+
+\addcontentsline{toc}{section}{Stichwortverzeichnis}
+\printindex
+
+\end{document}
