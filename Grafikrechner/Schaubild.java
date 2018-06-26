@@ -10,7 +10,11 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
+/**
+ * Diese Klasse Zeichnet das Koordinatensystem und die funktion
+ * @author iljak
+ *
+ */
 public class Schaubild extends JPanel {
 
 	private double xMin = -10;
@@ -60,6 +64,9 @@ public class Schaubild extends JPanel {
 		  this.setBackground(Color.WHITE);
 		  
 		}
+	/**
+	 * Zeichnet Koordinatensystem und die Funktion
+	 */
 	@Override
 	protected void paintComponent(Graphics arg0) {
 		

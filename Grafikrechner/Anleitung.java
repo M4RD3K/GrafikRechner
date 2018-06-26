@@ -30,6 +30,7 @@ public class Anleitung extends JFrame {
 	JLabel jlAnleitung9;
 	JLabel jlAnleitung10;
 	JLabel jlAnleitung11;
+	JLabel jlAnleitung12;
 	public Anleitung() {
 		
 	 //JLabel Objekte bauen.
@@ -45,10 +46,10 @@ public class Anleitung extends JFrame {
      jlAnleitung9  = new JLabel("Als Variable nur X-Verweden");
      jlAnleitung11 = new JLabel("Einen Puntk als Komma verwenden.");
      jlAnleitung10 = new JLabel("Solange sie sich an die Obigen vorschriften Halten sollte es zu keinen Problemem mit dem Programm kommen.");
-    
+     jlAnleitung12 = new JLabel("Zum berechnen der nullstelle erst Zeichnen, dann Ableiten und beim x-Wert den startwert deklarieren worum die nullstelle gefunden werden soll");
     		 
      //JPanel Objekt bauen.
-	 jPAnleitung = new JPanel(new GridLayout(11,0));
+	 jPAnleitung = new JPanel(new GridLayout(13,0));
 	 
 	 //Panel Obtionen
 	 
@@ -64,6 +65,8 @@ public class Anleitung extends JFrame {
 	 jPAnleitung.add(jlAnleitung7);
 	 jPAnleitung.add(jlAnleitung8);
 	 jPAnleitung.add(jlAnleitung9);
+	 jPAnleitung.add(jlAnleitung11);
+	 jPAnleitung.add(jlAnleitung12);
 	 jPAnleitung.add(jlAnleitung10);
 	 
 	 jPAnleitung.setBackground(Color.WHITE);
