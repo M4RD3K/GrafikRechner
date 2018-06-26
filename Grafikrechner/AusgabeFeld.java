@@ -7,6 +7,10 @@ import java.awt.LayoutManager;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+
+/**
+ * Die Klasse AusgabeFeld gibt einem die Moeglichkeit das untere Panel der Gui einfach zu bearbeiten.
+ */
 public class AusgabeFeld extends JPanel {
 
 	 //Jlabel

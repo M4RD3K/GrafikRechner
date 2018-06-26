@@ -4,6 +4,10 @@ import java.awt.Color;
 
 import javax.swing.*;
 
+
+/**
+ *In der Klasse UnsereMenubar kann die Menuebar unseres Projektes genauer Konfiguriert werden 
+ */
 public class UnsereMenuBar extends JMenuBar {
 
 	
@@ -31,7 +35,6 @@ public class UnsereMenuBar extends JMenuBar {
 	   //JMenu menuitems zuweisen 
 	   jmskalierung.add(jmiSkalierungEinstellen);
 	   jmHilfe.add(jmiAnleitung);
-	   jmHilfe.addSeparator();
 	   
 	   //JMenu in die Menubar hinzufügen
 	   this.add(jmskalierung);

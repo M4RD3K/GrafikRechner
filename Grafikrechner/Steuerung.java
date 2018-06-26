@@ -12,11 +12,11 @@ import javax.swing.event.AncestorListener;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
 /**
- * Dies ist die wichtigste Klasse des Programms. Sie Kümmert sich um die Berechnungen und Zerlegung der Funktionen.
- * Gleichzeitig stellt sie auch die Verbindung mit der Gui und damit diese die Funktion zeichnen kann.  
+ * Dies ist die wichtigste Klasse des Programms. 
+ * Sie Kuemmert sich um die Berechnungen und Zerlegung der Funktionen.
+ * Gleichzeitig stellt sie auch die Verbindung mit der Gui her, damit diese die Funktion zeichnen kann.  
  *
  * */
-
 public class Steuerung {
 
 	Gui dieGui;
@@ -26,9 +26,8 @@ public class Steuerung {
 	DecimalFormat format;
 	
 	/**
-	 * Im Konstruktur werden die Listner der Buttons gesetzt, welche die jeweilige gewollte Funktion des Buttons ausführen
+	 * Im Konstruktur werden die Listner der Buttons gesetzt, welche die jeweilige gewollte Funktion des Buttons ausfuehren
 	 */
-	
 	public Steuerung() {
 	
 		dieSkalierung = new Skalierung();
@@ -113,8 +112,8 @@ public class Steuerung {
 	
     /**
      *In der Methode funktionsgleichungZerlegen wird die eingegebene Funktion nach den Rechenzeichen 
-     *der Addition und Subtraktion zerlegt. Beispielsweise 2x^2-3x wird zerlegt in 2x^2 und 3x.
-     *Diese Zerlegten Strings werden dann in eine ArrayList gespreichert, die in der Datenklasse übergeben wird.
+     *der Addition und Subtraktion zerlegt. Beispielsweise 2x^2-3x wird zerlegt in 2x^2 und -3x.
+     *Diese Zerlegten Strings werden dann in eine ArrayList gespreichert, die in der Datenklasse uebergeben wird.
      *@param gleichung dies ist die eingegebene Funktionsgleichung aus der Gui
      */
 	public void funktionsgleichungZerlegen(String gleichung) {
@@ -162,11 +161,11 @@ public class Steuerung {
 	}
 	
 	/**
-	 *In der berechneYWert Methode wird der Y-Wert für einen bestimmten Zahlenwert berechnet. Dabei ruft die Methode die Daten
-	 *der Zerlegten Funktionsgleichung ab und berechnet für jede Funktion einen Y-Wert. Dieser Y-Wert wird dann mit dem des vorherigen
-	 *adidert. Die Methode ist dann komplett durchgelafen sobald der Y-Wert für alle Funktionen berechnet wurde. 
+	 *In der berechneYWert Methode wird der Y-Wert fuer einen bestimmten Zahlenwert berechnet. Dabei ruft die Methode die Daten
+	 *der Zerlegten Funktionsgleichung ab und berechnet fuer jede Funktion einen Y-Wert. Dieser Y-Wert wird dann mit dem des vorherigen
+	 *adidert. Die Methode ist dann komplett durchgelafen sobald der Y-Wert fuer alle Funktionen berechnet wurde. 
 	 *@param x ist die Zahl die in die Funktion eingesetzt wird. 
-	 *@return wird dann der Y-Wert in Form einer Kommazahl zurück gegeben. 
+	 *@return wird dann der Y-Wert in Form einer Kommazahl zurueck gegeben. 
 	 */
 	public double berechneYWert(double x) {
 		
@@ -178,16 +177,8 @@ public class Steuerung {
 		
 				try {
 
-					double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukte.get(i));
-					if (konstante == 1) {
-						
-						ywert = ywert+0;
-						
-					} else {
-						
-						ywert = ywert + konstante;
-					}
-				
+					double konstante = Double.parseDouble(dieProdukte.get(i));
+					ywert = ywert+konstante;
 
 				} catch (Exception e) {
 
@@ -268,7 +259,7 @@ public class Steuerung {
    /**
     * In der Methode bestimmeExponent wird bestimmt welcher Funktionsgrad vorliegt. Dabei wird die Jeweilige Funktion, nach einem Hochtzeichen (^)
     * untersucht und danach anhand der gefundenen stelle, die Hochzahl bestimmt und als Kommazahl umformatiert.
-    * @param exponent enthält den String von dem der Exponent bestimmt werden soll. 
+    * @param exponent enthaelt den String von dem der Exponent bestimmt werden soll. 
     * @return ist der Gefundene Exponent. 
     */
 	public double bestimmeExponent(String exponent) {
@@ -304,8 +295,8 @@ public class Steuerung {
 	/**
 	 * Die Methode bestimmeKonstanteDesProduktes bestimmt die Jeweilige Konstante eines einzelnen Produktes. 
 	 * Beispielsweise bei 3x^2 ist die Konstante 3. 
-	 * @param skonstante ist der String der die jeweilige Konstante enthält. 
-	 * @return wird die Konstante zurück gegeben. 
+	 * @param skonstante ist der String der die jeweilige Konstante enthaelt. 
+	 * @return wird die Konstante zurueck gegeben. 
 	 */  
 	public double bestimmeKonstanteDesProdukts(String skonstante) {
 		int index =1;
@@ -395,6 +386,12 @@ public class Steuerung {
 		dieGui.funktionsMenuPanel.jlYwert1.setText("Y-Wert: "+berechneYWert(getEingegebenerXwert()));
 	}
 	
+	/**
+	 * Die Methode ableitung ermoeglicht es Funktionen abzuleiten. 
+	 * Hierbei wird die Zerlegte Funktion aus der Datenklasse verwendet
+	 * Von der Zerlegten Funktion werden jeweils die Konstante und der Exponent berechnet und je nach Funktionstyp abgleitet.
+	 * Bisher werden nur GRF und Trigromtrische Funktionen in der Normalform untersÃ¼tzt. (ohne ausmultiplzieren etc.)
+	 */
 	public void bestimeAbleitung() {
 	    
 		funktionsgleichungZerlegen(getFunktionsgleichungAusGui());
@@ -530,6 +527,10 @@ public class Steuerung {
 		dieGui.dasAusgabefeld.jlAbleitung.setText("f'(x) = "+ableitung);
 	}
 	
+	
+	/**
+	 * Die Methode gebeTextSkalierung holt den text aus dem Fenster in dem man die Skalierung einstellen kann.
+	 */
 	public void gebeTextSkalierung() {
 		
 		dieGui.dasSchaubild.setxMin(Double.parseDouble(dieSkalierung.jtXmin.getText()));
@@ -539,7 +540,10 @@ public class Steuerung {
 		dieGui.repaint();
 			
 	}
-	
+	/**Die Methode setzeStandartSkalierung setzt den Text in in dem Fenster in dem die Skalierung eingesellt wird auf 
+	 * den Standart wert zuruek. 
+	 * 
+	 */
 	public void setzeStandartSkalierung() {
 		
 		dieGui.dasSchaubild.setxMin(-10);
@@ -552,7 +556,13 @@ public class Steuerung {
 		dieSkalierung.jtYmin.setText("-10");
 		dieSkalierung.jtYmax.setText("10");	
 	}
-	
+	/**
+	 * Die Methode ueberpuefeFunktion Ã¼berprÃ¼ft die Funktionsgleichung auf Fehler wie beispielsweise ein Komma statt Punkt
+	 * oder das verwendet einer falschen Variable. Sie ist zureit jedoch nicht aktiv da sie probleme bei sin(x) und cos(x) 
+	 * verursacht. 
+	 * @param funktion
+	 * @return
+	 */
     public boolean ueberpruefeFunktion(String funktion){
 	  
 	  if (funktion.contains(",")) {
@@ -578,12 +588,12 @@ public class Steuerung {
 	}
 	 return true; 
   }	
-	  
+    /**
+     * Diese Methode setzt im Fehlelerfall den Text "Fehler" in das Feld im dem die Funktion seht.
+     */
     public void setzeFehler() {
 	  
 	  dieGui.funktionsMenuPanel.jtfFunktion1.setText("Fehler");
-	  
-	  
 	  
   }
 	

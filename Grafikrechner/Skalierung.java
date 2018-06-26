@@ -2,6 +2,10 @@ package Grafikrechner;
 
 import java.awt.GridLayout;
 
+/**
+ * In der Klasse Skalierung kann das Fenster in dem die Skalierung angezeigt wird Bearbeitet werden.
+ */
+
 import javax.swing.*;
 
 public class Skalierung extends JFrame {

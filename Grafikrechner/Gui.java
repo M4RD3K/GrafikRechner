@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-
+/**
+ * In der Gui Klasse wird die Gui unseres Programmes aus den einzelnen Paneln zu einem kompletten Frame zusammen gesetzt. 
+ */
 public class Gui extends JFrame {
 	
 	  //Ausgabefeld
