@@ -11,9 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 /**
- * Diese Klasse Zeichnet das Koordinatensystem und die funktion
- * @author iljak
- *
+ * Diese Klasse Zeichnet das Koordinatensystem und die Funktion
  */
 public class Schaubild extends JPanel {
 
@@ -145,7 +143,7 @@ public class Schaubild extends JPanel {
 			
 		}
 		g.drawPolyline(xPunkte, yPunkte, xWerte.length);
-		if(dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("a")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("z")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("z")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("q")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("w")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("r")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("t")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("u")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("p")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ü")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ä")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ö")) {
+		if(dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("a")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("z")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("z")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("q")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("w")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("r")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("t")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("u")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("p")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ï¿½")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ï¿½")||dieGui.funktionsMenuPanel.jtfFunktion1.getText().contains("ï¿½")) {
 			g.setColor(new Color(0,0,0));
 			g.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
 			//g.drawString("Fehler", 50, 50);

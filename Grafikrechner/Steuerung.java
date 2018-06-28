@@ -340,7 +340,7 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		 return dExponent;	  
 	  }
 	/**
-	 * berechnet durch das newton verfahren die nullstelle und gibt sie auf der oberfläche aus
+	 * berechnet durch das newton verfahren die nullstelle und gibt sie auf der oberflaeche aus
 	 * @param x ist der starwert worum die nullstelle gefunden werden soll
 	 */
 	 public void findeNullstelle(double x) {
@@ -354,9 +354,9 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 	  }
 	  
 	  /**
-	   * Berechnet den Ywert der Ableiteung für einen spezifischen xwert
+	   * Berechnet den Ywert der Ableiteung fuer einen spezifischen xwert
 	   * @param x xwert
-	   * @return ywert wird zurückgegeben
+	   * @return ywert wird zurueckgegeben
 	   */
 	  
 	  public double berechneYWertAbleitung(double x) {
@@ -370,7 +370,6 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 					try {
 
 						double konstante = bestimmeKonstanteDesProdukts(dieDaten.zerlegteProdukteAbleitung.get(i));
-						System.out.println(konstante);
 						if (konstante == 1) {
 							
 							ywert = ywert+0;

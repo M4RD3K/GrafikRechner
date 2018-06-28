@@ -33,11 +33,11 @@ public class AusgabeFeld extends JPanel {
 		
 		//Jlabel objekte
 		jlExtrempunkte = new JLabel("Extrempunkte:");
-		jlZeigeExtrempunke = new JLabel("P(X/Y");
+		jlZeigeExtrempunke = new JLabel("P(X/Y)");
 		jlAbleitung = new JLabel("f'(x)");
 		jlZeigeAbleitung = new JLabel("Ableitung");
 		jlNullstelle = new JLabel("Nullstellen: ");
-		jlZeigeNullstellen = new JLabel("P(X/Y");
+		jlZeigeNullstellen = new JLabel("P(X/Y)");
 		jlAbleitungAnzeige = new JLabel("Ableitung:");
 		
 		//Jbutton objekte
