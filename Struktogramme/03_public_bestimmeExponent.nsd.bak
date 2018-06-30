@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="http://structorizer.fisch.lu/" version="3.25" text="&#34;public bestimmeExponent(String exponent)&#34;" comment="" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;dExponent:FKZ&#34;" comment="" color="ffffff" rotated="0"></instruction>
+		<alternative text="&#34;if (exponent.contains(&#34;&#34;^&#34;&#34;))&#34;" comment="" color="ffffff">
+			<qTrue>
+				<instruction text="&#34;char[] liste &#60;- exponent.toCharArray();&#34;" comment="" color="ffffff" rotated="0"></instruction>
+				<instruction text="&#34;index:GZ &#60;- 0;&#34;" comment="" color="ffffff" rotated="0"></instruction>
+				<while text="&#34;for (int i = 0; i &#60; liste.length; i++)&#34;" comment="" color="ffffff">
+					<qWhile>
+						<alternative text="&#34;if (liste[i] == '^')&#34;" comment="" color="ffffff">
+							<qTrue>
+								<instruction text="&#34;index &#60;- i;&#34;" comment="" color="ffffff" rotated="0"></instruction>
+							</qTrue>
+							<qFalse>
+							</qFalse>
+						</alternative>
+					</qWhile>
+				</while>
+			</qTrue>
+			<qFalse>
+				<instruction text="&#34;exponent &#60;- exponent.substring(index+1,exponent.length());&#34;" comment="" color="ffffff" rotated="0"></instruction>
+				<instruction text="&#34;dExponent &#60;- Double.parseDouble(exponent);&#34;" comment="" color="ffffff" rotated="0"></instruction>
+				<instruction text="&#34;return dExponent;&#34;" comment="" color="ffffff" rotated="0"></instruction>
+			</qFalse>
+		</alternative>
+		<instruction text="&#34;dExponent &#60;- 1.0;&#34;" comment="" color="ffffff" rotated="0"></instruction>
+		<instruction text="&#34;return dExponent;  &#34;" comment="" color="ffffff" rotated="0"></instruction>
+	</children>
+</root>
