@@ -1,100 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>9</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>45</x>
-      <y>99</y>
-      <w>279</w>
-      <h>135</h>
-    </coordinates>
-    <panel_attributes>Anleitung
---
-
---
-+Anleitung()
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>351</x>
-      <y>99</y>
-      <w>297</w>
-      <h>135</h>
+      <x>1246</x>
+      <y>343</y>
+      <w>140</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>AusgabeFeld
 --
 
 --
 +AusgabeFeld()
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>810</x>
-      <y>108</y>
-      <w>369</w>
-      <h>135</h>
-    </coordinates>
-    <panel_attributes>Daten
---
 
---
-+Daten()
-+speichereAktuelleProdukte(ArrayList&lt;String&gt; dieListe)
-</panel_attributes>
+bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>54</x>
-      <y>288</y>
-      <w>270</w>
-      <h>162</h>
+      <x>301</x>
+      <y>385</y>
+      <w>119</w>
+      <h>49</h>
     </coordinates>
-    <panel_attributes>FrameAnleitung
+    <panel_attributes>Anleitung
 --
 
 --
 +FrameAnleitung()
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>351</x>
-      <y>270</y>
-      <w>288</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes>FunktionisMenuPanel
---
 
---
-+FunktionsMenuPanel()
-</panel_attributes>
+bg=cyan</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>684</x>
-      <y>279</y>
-      <w>297</w>
-      <h>207</h>
+      <x>952</x>
+      <y>329</y>
+      <w>196</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>Gui
 --
 
 --
-+Gui(Steuerung dieSteuerung)
++Gui(Steuerung dieSteuerungv)
 
 bg=red</panel_attributes>
     <additional_attributes/>
@@ -102,10 +55,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>999</x>
-      <y>279</y>
-      <w>378</w>
-      <h>207</h>
+      <x>952</x>
+      <y>441</y>
+      <w>189</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>Schaubild
 --
@@ -113,14 +66,14 @@ bg=red</panel_attributes>
 --
 +Schaubild(Gui)
 
-+getxMin():double
-+setxMin(double)
-+getxMax():double
-+setxMax(double)
-+getyMin():double
-+setyMin(double)
-+getyMax():double
-+setyMax(double)
++getxMin():FKZ
++setxMin(xMin: FKZ)
++getxMax():FKZ
++setxMax(xMax: FKZ)
++getyMin():FKZ
++setyMin(yMin: FKZ)
++getyMax():FKZ
++setyMax(yMax:FKZ)
 
 
 bg=green</panel_attributes>
@@ -129,55 +82,47 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>54</x>
-      <y>477</y>
-      <w>288</w>
-      <h>225</h>
+      <x>301</x>
+      <y>308</y>
+      <w>112</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>Skalierung
 --
 
 --
 +Skalierung()
-</panel_attributes>
+
+bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>369</x>
-      <y>486</y>
-      <w>288</w>
-      <h>252</h>
-    </coordinates>
-    <panel_attributes>Startklasse
---
-
---
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>675</x>
-      <y>522</y>
+      <x>504</x>
+      <y>294</y>
       <w>315</w>
-      <h>270</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>Steuerung
 --
 
 --
-+funktionsgleichungZerlegen(String)
-+getFunktionsgleichenAusGui():String
-+berechneYWert(double):double
-+bestimmeExponent(String):double
-+bestimmeKonstanteDesProdukts(String):double
-+berechneProduktZahlenWert(double)
-+getEingegebenerXwert():double
++Steuerung()
++funktionsgleichungZerlegen(gleichung: txt)
++getFunktionsgleichenAusGui():txt
++berechneYWert(x: FKZ):FKZ
++bestimmeExponent(gleichung: txt):FKZ
++bestimmeKonstanteDesProdukts(gleichung: txt):FKZ
++berechneProduktZahlenWert(x :FKZ)
++getEingegebenerXwert():FKZ
 +ausgabeXYwert()
++bestimmeAbleitung()
++gebeTextSkalierung()
++setzteStandartSkalierung()
++ueberpruefeFunktion(funktion: txt)
++setzeFehler()
++findeNulstelle(x:FKZ)
 
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -185,17 +130,188 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1017</x>
-      <y>558</y>
-      <w>369</w>
-      <h>225</h>
+      <x>1085</x>
+      <y>224</y>
+      <w>133</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>UnsereMenuBar
 --
 
 --
 +UnsereMenuBar()
-</panel_attributes>
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>812</x>
+      <y>364</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>r1= dieSteuerung
+r2= dieGui
+m1= 1
+m2= 1</panel_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1050</x>
+      <y>392</y>
+      <w>84</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+r1= dasSchaubild
+m1= 1</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1141</x>
+      <y>364</y>
+      <w>119</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+r1= dasAusgabefeld
+m1= 1</panel_attributes>
+    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1127</x>
+      <y>273</y>
+      <w>70</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+r1= UnserMenu
+m1= 1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>973</x>
+      <y>273</y>
+      <w>112</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+r1= funktionsMenuPanel
+m1= 1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>889</x>
+      <y>231</y>
+      <w>161</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>FunktionsMenuPanel
+--
+
+--
++FunktionsMenuPanel()
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>406</x>
+      <y>315</y>
+      <w>112</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+r1= dieSkalierung
+m1= 1</panel_attributes>
+    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>413</x>
+      <y>392</y>
+      <w>105</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+r1= dieAnleitung
+m1= 1</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>245</y>
+      <w>63</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+r1= dieDaten
+m1= 1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>623</x>
+      <y>189</y>
+      <w>245</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>Daten
+--
+
+--
++Daten()
++speichereAkutelleProdukte(dieListe: ArrayList)
+
+bg=magenta</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>525</x>
+      <y>238</y>
+      <w>84</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+r1=dieSteuerung
+m1= 1</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>497</x>
+      <y>196</y>
+      <w>84</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>Startklasse
+--
+
+--
++main()
+
+bg=gray</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
