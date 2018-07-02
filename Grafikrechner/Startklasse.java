@@ -1,14 +1,16 @@
 package Grafikrechner;
 
+
 /**
- * Diese Klasse Startet unser Programm
+ * Diese Klasse beinhaltet unsere main Methode und startet das Programm.
  */
 public class Startklasse {
 
 	public static void main(String[] args) {
 	
        Steuerung s = new Steuerung();
-				
+       
+      
 	}
 	
 	

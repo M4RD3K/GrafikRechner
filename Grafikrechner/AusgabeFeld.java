@@ -14,8 +14,6 @@ import javax.swing.border.TitledBorder;
 public class AusgabeFeld extends JPanel {
 
 	 //Jlabel
-	JLabel jlExtrempunkte;
-	JLabel jlZeigeExtrempunke;
 	JLabel jlZeigeNullstellen;
 	JLabel jlAbleitung;
 	JLabel jlZeigeAbleitung;
@@ -25,25 +23,21 @@ public class AusgabeFeld extends JPanel {
 	//Jbutton
 	JButton jbZeichneFunktion;
 	JButton jbAbleiten;
-	JButton jbExtrempunkte;
 	JButton jbNullstellen;
 	
 	public AusgabeFeld() {
 		
 		
 		//Jlabel objekte
-		jlExtrempunkte = new JLabel("Extrempunkte:");
-		jlZeigeExtrempunke = new JLabel("P(X/Y)");
 		jlAbleitung = new JLabel("f'(x)");
 		jlZeigeAbleitung = new JLabel("Ableitung");
-		jlNullstelle = new JLabel("Nullstellen: ");
+		jlNullstelle = new JLabel("Nullstelle: ");
 		jlZeigeNullstellen = new JLabel("P(X/Y)");
 		jlAbleitungAnzeige = new JLabel("Ableitung:");
 		
 		//Jbutton objekte
 		jbZeichneFunktion = new JButton("Zeichnen");
 		jbAbleiten        = new JButton("Ableiten");
-		jbExtrempunkte    = new JButton("Berechnen");
 		jbNullstellen     = new JButton("Berechnen");
 		
 		//Einstellungen
@@ -52,15 +46,11 @@ public class AusgabeFeld extends JPanel {
 		this.add(jlAbleitung);
 		this.add(jbAbleiten);
 		
-		this.add(jlExtrempunkte);
-		this.add(jlZeigeExtrempunke);
-		this.add(jbExtrempunkte);
-		
 		this.add(jlNullstelle);
 		this.add(jlZeigeNullstellen);
 	    this.add(jbNullstellen);
 	    
-		this.setLayout(new GridLayout(3,3));
+		this.setLayout(new GridLayout(2,3));
 		this.setBorder(new TitledBorder("Aktionen"));
 		this.setBackground(Color.white);
 		

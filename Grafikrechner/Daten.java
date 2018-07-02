@@ -3,9 +3,8 @@ package Grafikrechner;
 import java.util.ArrayList;
 
 /**
- * Die Datenlasse wird dazu verwendet um Daten die anfallen fuer eine Berechnung kurzzeitig zu speichern. 
+ * Die Datenklasse wird dazu verwendet um Daten die fuer eine Berechnung anfallen, kurzzeitig zu speichern. 
  */
-
 public class Daten {
 
    ArrayList<String> zerlegteProdukte; 

@@ -13,8 +13,8 @@ import javax.swing.plaf.synth.SynthSpinnerUI;
 
 /**
  * Dies ist die wichtigste Klasse des Programms. 
- * Sie Kuemmert sich um die Berechnungen und Zerlegung der Funktionen.
- * Gleichzeitig stellt sie auch die Verbindung mit der Gui her, damit diese die Funktion zeichnen kann.  
+ * Sie kuemmert sich um die Berechnungen und Zerlegung der Funktionen.
+ * Gleichzeitig stellt sie auch die Verbindung mit der Gui her damit diese die Funktion zeichnen kann.  
  *
  * */
 public class Steuerung {
@@ -26,7 +26,7 @@ public class Steuerung {
 	DecimalFormat format;
 	
 	/**
-	 * Im Konstruktur werden die Listner der Buttons gesetzt, welche die jeweilige gewollte Funktion des Buttons ausfuehren
+	 * Im Konstruktur werden die Listener der Buttons gesetzt, welche die jeweilig gewollte Funktion des Buttons ausfuehren.
 	 */
 	public Steuerung() {
 	
@@ -37,6 +37,7 @@ public class Steuerung {
 		
 		format = new DecimalFormat();
 		format.setDecimalSeparatorAlwaysShown(false);
+		
 	
 		dieGui.dasAusgabefeld.jbAbleiten.addActionListener(new ActionListener() {
 			
@@ -60,7 +61,7 @@ public class Steuerung {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-		dieDaten.x=Double.parseDouble(dieGui.funktionsMenuPanel.jtfXwert1.getText());
+		dieDaten.x=getEingegebenerXwert();
 				findeNullstelle(dieDaten.x);
 				
 			}
@@ -122,8 +123,8 @@ public class Steuerung {
     /**
      *In der Methode funktionsgleichungZerlegen wird die eingegebene Funktion nach den Rechenzeichen 
      *der Addition und Subtraktion zerlegt. Beispielsweise 2x^2-3x wird zerlegt in 2x^2 und -3x.
-     *Diese Zerlegten Strings werden dann in eine ArrayList gespreichert, die in der Datenklasse uebergeben wird.
-     *@param gleichung dies ist die eingegebene Funktionsgleichung aus der Gui
+     *Diese zerlegten Strings werden dann in eine ArrayList gespreichert, die in der Datenklasse uebergeben wird.
+     *@param gleichung Dies ist die eingegebene Funktionsgleichung aus der Gui
      */
 	public void funktionsgleichungZerlegen(String gleichung) {
 		
@@ -162,8 +163,8 @@ public class Steuerung {
 		
 	}
 	/**
-	 * Macht das gleiche wie funktionsgleichungZerlegen nur mit der Ableitung
-	 * @param gleichung
+	 * Macht das gleiche wie funktionsgleichungZerlegen nur das sie die Ableitung verwendet.
+	 * @param gleichung Dies ist die Ableitung der eingebenen Funktionsgleichung.
 	 */
 public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		
@@ -201,19 +202,26 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		dieDaten.zerlegteProdukteAbleitung = zerlegeStrings;
 		
 	}
+/**
+ * Die Methode getFunktionsgeichungAusGui liefert die eingebene Funktionsgleichung.
+ * @return Dies ist die eingebene Funktionsgleichung.
+ */
 	public String getFunktionsgleichungAusGui() {
 
 		String s = dieGui.funktionsMenuPanel.jtfFunktion1.getText();
-		return s;
 		
+		s = s.replaceAll(",", ".");
+		
+		return s;
+			
 	}
 	
 	/**
 	 *In der berechneYWert Methode wird der Y-Wert fuer einen bestimmten Zahlenwert berechnet. Dabei ruft die Methode die Daten
-	 *der Zerlegten Funktionsgleichung ab und berechnet fuer jede Funktion einen Y-Wert. Dieser Y-Wert wird dann mit dem des vorherigen
-	 *adidert. Die Methode ist dann komplett durchgelafen sobald der Y-Wert fuer alle Funktionen berechnet wurde. 
-	 *@param x ist die Zahl die in die Funktion eingesetzt wird. 
-	 *@return wird dann der Y-Wert in Form einer Kommazahl zurueck gegeben. 
+	 *der zerlegten Funktionsgleichung ab und berechnet fuer jede Funktion einen Y-Wert. Dieser Y-Wert wird dann mit dem des vorherigen
+	 *addidert. Die Methode ist dann komplett durchgelafen sobald der Y-Wert fuer alle Funktionen berechnet wurde. 
+	 *@param x Dies ist die Zahl die in die Funktion eingesetzt wird. 
+	 *@return Hier wird dann der Y-Wert in Form einer Kommazahl zurueck gegeben. 
 	 */
 	public double berechneYWert(double x) {
 		
@@ -305,10 +313,10 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 	
 	
    /**
-    * In der Methode bestimmeExponent wird bestimmt welcher Funktionsgrad vorliegt. Dabei wird die Jeweilige Funktion, nach einem Hochtzeichen (^)
-    * untersucht und danach anhand der gefundenen stelle, die Hochzahl bestimmt und als Kommazahl umformatiert.
-    * @param exponent enthaelt den String von dem der Exponent bestimmt werden soll. 
-    * @return ist der Gefundene Exponent. 
+    * In der Methode bestimmeExponent wird bestimmt welcher Funktionsgrad vorliegt. Dabei wird die jeweilige Funktion, nach einem Hochzeichen (^)
+    * untersucht und danach anhand der gefundenen Stelle, die Hochzahl bestimmt und als Kommazahl umformatiert.
+    * @param exponent Dies enthaelt den String von dem der Exponent bestimmt werden soll. 
+    * @return Dies ist der Gefundene Exponent. 
     */
 	public double bestimmeExponent(String exponent) {
 		  
@@ -340,25 +348,28 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		 return dExponent;	  
 	  }
 	/**
-	 * berechnet durch das newton verfahren die nullstelle und gibt sie auf der oberflaeche aus
-	 * @param x ist der starwert worum die nullstelle gefunden werden soll
+	 * Die Methode findeNullstelle berechnet durch das Newton-Verfahren die Nullstelle und gibt sie auf der Oberflaeche aus.
+	 * @param x Ist der Starwert indem die Nullstelle gefunden werden soll.
 	 */
 	 public void findeNullstelle(double x) {
-		  int iterationen= 100000;		  
-		  double xalt= x;
+		 
+		
+		  int iterationen= 50000;		  
+		  double xalt= x+0.0001;
 		  for(int i=0;i<=iterationen;i++) {
 			  xalt = xalt-(berechneYWert(xalt)/berechneYWertAbleitung(xalt));
 			  
 		  }
+		  xalt = (int)((xalt*10000)+0.5);
+		  xalt = xalt/10000;
 		  dieGui.dasAusgabefeld.jlZeigeNullstellen.setText("N("+xalt+"/"+0+")");
 	  }
 	  
 	  /**
-	   * Berechnet den Ywert der Ableiteung fuer einen spezifischen xwert
-	   * @param x xwert
-	   * @return ywert wird zurueckgegeben
+	   * Diese Methode berechnet den y-Wert der Ableiteung fuer einen spezifischen X-Wert.
+	   * @param x Ist der eingebene x-Wert
+	   * @return ywert Dies ist der berechnete y-Wert
 	   */
-	  
 	  public double berechneYWertAbleitung(double x) {
 			
 			ArrayList<String> dieProdukte = new ArrayList<>();
@@ -455,10 +466,10 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 			
 	    }
 	/**
-	 * Die Methode bestimmeKonstanteDesProduktes bestimmt die Jeweilige Konstante eines einzelnen Produktes. 
+	 * Die Methode bestimmeKonstanteDesProduktes bestimmt die jeweilige Konstante eines einzelnen Produktes. 
 	 * Beispielsweise bei 3x^2 ist die Konstante 3. 
-	 * @param skonstante ist der String der die jeweilige Konstante enthaelt. 
-	 * @return wird die Konstante zurueck gegeben. 
+	 * @param skonstante Ist der String der die jeweilige Konstante enthaelt. 
+	 * @return Hier wird die Konstante zurueck gegeben. 
 	 */  
 	public double bestimmeKonstanteDesProdukts(String skonstante) {
 		int index =1;
@@ -488,6 +499,7 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 			
 		}
 		
+		
 		if (skonstante.equals("")) {
 			return 1;
 		} else if (skonstante.equals("-")) {
@@ -507,12 +519,12 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 	} 
 	
 	/**
-	 * Die Methode berechnePrdouktZahlenWert berechnet den Jeweiligen Zahlenwert der sich aus einer Funktion ergibt,
-	 * wenn man in diese ein bestimmtes x einsetzt. Dabei wird die bestimmte Konstante mit dem jeweiligen X-Wert und seiner Hochzahl multipliziert.
-	 * @param x ist die Zahl die in die Funktion eingesetzt wird 
-	 * @param hochzahl ist die vorher bestimmte Hochzahl aus  der Methode bestimmeExponetDesProdukes.
-	 * @param konstante ist die vorher bestimme Konstante asu der Methode bestimmeKonstanteDesProduktes.
-	 * @return ist der brechnete Zahlenwert
+	 * Die Methode berechnePrdouktZahlenWert berechnet den jeweiligen Zahlenwert der sich aus einer Funktion ergibt,
+	 * wenn man in diese ein bestimmtes X einsetzt. Dabei wird die bestimmte Konstante mit dem jeweiligen X-Wert und seiner Hochzahl multipliziert.
+	 * @param x Ist die Zahl die in die Funktion eingesetzt wird 
+	 * @param hochzahl Dies ist die vorher bestimmte Hochzahl aus der Methode bestimmeExponetDesProdukes.
+	 * @param konstante Dies ist die vorher bestimme Konstante aus der Methode bestimmeKonstanteDesProduktes.
+	 * @return Hier wird der berechnete Zahlenwert zurück gegeben. 
 	 */
 	public double berechneProduktZahlenWert(double x,double hochzahl,double konstante) {
 	
@@ -529,6 +541,10 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
      
     }
 	
+	/**
+	 * Die Methode getEingebenerXwert holt aus der Gui den eingebenenen x-Wert.
+	 * @return Dies ist der eingebene x-Wert.
+	 */
 	public double getEingegebenerXwert() {
 		
 		try {
@@ -542,17 +558,19 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		}
 		
 	}
-	
+	/**
+	 * Diese Metode setzt das Label dass fuer die Ausgabe des y-Wertes zustaendig ist. 
+	 */
 	public void ausgabeXYwert() {
 		
-		dieGui.funktionsMenuPanel.jlYwert1.setText("Y-Wert: "+berechneYWert(getEingegebenerXwert()));
+		dieGui.funktionsMenuPanel.jlYwert1.setText("y-Wert: "+berechneYWert(getEingegebenerXwert()));
 	}
 	
 	/**
-	 * Die Methode ableitung ermoeglicht es Funktionen abzuleiten. 
-	 * Hierbei wird die Zerlegte Funktion aus der Datenklasse verwendet
-	 * Von der Zerlegten Funktion werden jeweils die Konstante und der Exponent berechnet und je nach Funktionstyp abgleitet.
-	 * Bisher werden nur GRF und Trigromtrische Funktionen in der Normalform untersützt. (ohne ausmultiplzieren etc.)
+	 * Die Methode bestimmeAbleitung ermoeglicht es Funktionen abzuleiten. 
+	 * Hierbei wird die zerlegte Funktion aus der Datenklasse verwendet.
+	 * Von der zerlegten Funktion werden jeweils die Konstante und der Exponent berechnet und je nach Funktionstyp abgleitet.
+	 * Bisher werden nur GRF und Trigromtrische Funktionen in der Normalform unterstuetzt. (ohne ausmultiplzieren etc.)
 	 */
 	public void bestimeAbleitung() {
 	    
@@ -681,12 +699,17 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		}
 		
 	    String ableitung = String.join("", abgeleitereProdukte);
-	    
 	    if (ableitung.startsWith("+")) {
 			ableitung = ableitung.substring(1,ableitung.length());
 		}
+	    
+	    ableitung = ableitung.replace(",",".");
+	    
 	    funktionsgleichungAbleitungZerlegen(ableitung);
+	    
 		dieGui.dasAusgabefeld.jlAbleitung.setText("f'(x) = "+ableitung);
+		
+		
 	}
 	
 	
@@ -702,8 +725,8 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		dieGui.repaint();
 			
 	}
-	/**Die Methode setzeStandartSkalierung setzt den Text in in dem Fenster in dem die Skalierung eingesellt wird auf 
-	 * den Standart wert zuruek. 
+	/**Die Methode setzeStandartSkalierung setzt den Text in dem Fenster in dem die Skalierung eingesellt wird auf 
+	 * den Standart Wert zuruek. 
 	 * 
 	 */
 	public void setzeStandartSkalierung() {
@@ -719,11 +742,11 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 		dieSkalierung.jtYmax.setText("10");	
 	}
 	/**
-	 * Die Methode ueberpuefeFunktion überprüft die Funktionsgleichung auf Fehler wie beispielsweise ein Komma statt Punkt
-	 * oder das verwendet einer falschen Variable. Sie ist zureit jedoch nicht aktiv da sie probleme bei sin(x) und cos(x) 
+	 * Die Methode ueberpuefeFunktion ueberprueft die Funktionsgleichung auf Fehler wie beispielsweise ein Komma statt Punkt
+	 * oder das verwendet einer falschen Variable. Sie ist zureit jedoch nicht aktiv da sie Probleme bei sin(x) und cos(x) 
 	 * verursacht. 
-	 * @param funktion
-	 * @return
+	 * @param funktion Dies ist die Funktionsgleichung.
+	 * @return Die Methode gibt true zurueck wenn die Funktion korrekt ist.
 	 */
     public boolean ueberpruefeFunktion(String funktion){
 	  

@@ -6,7 +6,7 @@ import javax.swing.*;
 
 
 /**
- *In der Klasse UnsereMenubar kann die Menuebar unseres Projektes genauer Konfiguriert werden 
+ *In der Klasse UnsereMenubar kann die Menuebar unseres Projektes genauer konfiguriert werden. 
  */
 public class UnsereMenuBar extends JMenuBar {
 
@@ -29,7 +29,7 @@ public class UnsereMenuBar extends JMenuBar {
 	   
 	   //JMenuItem
 	   jmiAnleitung = new JMenuItem("Anleitung");
-	   jmiSkalierungEinstellen = new JMenuItem("Skalierung Einstellen");
+	   jmiSkalierungEinstellen = new JMenuItem("Skalierung einstellen");
 	   
 	   
 	   //JMenu menuitems zuweisen 

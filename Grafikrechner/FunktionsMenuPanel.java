@@ -8,8 +8,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Die Klasse FunktionsMenuPanel ist das die Klasse, die das Panel einstellt mit dem in der Gui die Funktionsgleichung
- * eingeben werden kann. Dies Beinhaltet auch eine eingabefeld zur Berechung eines bestimmten xy wertes und den Button um
+ * Die Klasse FunktionsMenuPanel ist die Klasse, die das Panel, mit dem in der Gui die Funktionsgleichung
+ * eingegeben werden kann, erstellt. Dies beinhaltet auch ein Eingabefeld zur Berechung eines bestimmten X/Y-Wertes und den Button um
  * das Schaubild der Funktion zu zeichnen.
  */
 public class FunktionsMenuPanel extends JPanel {

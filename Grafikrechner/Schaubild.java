@@ -11,7 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 /**
- * Diese Klasse Zeichnet das Koordinatensystem und die Funktion
+ * Diese Klasse zeichnet das Koordinatensystem und die Funktion.
  */
 public class Schaubild extends JPanel {
 
