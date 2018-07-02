@@ -303,7 +303,9 @@ public void funktionsgleichungAbleitungZerlegen(String gleichung) {
 							}
 						}
 
-					} 
+					} else {
+						ywert = bestimmeKonstanteDesProdukts(produkt);
+					}
 				} 
   }
 		

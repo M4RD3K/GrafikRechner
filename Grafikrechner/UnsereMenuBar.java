@@ -17,8 +17,6 @@ public class UnsereMenuBar extends JMenuBar {
 	
 	JMenuItem jmiAnleitung;
 	JMenuItem jmiSkalierungEinstellen;
-	JMenuItem jmiUeber;
-	
 	
    public UnsereMenuBar() {
 	
